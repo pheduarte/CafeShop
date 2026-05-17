@@ -80,8 +80,9 @@
 
     .beverage-price {
       margin: auto 0 0;
-      color: var(--accent);
-      font-weight: 700;
+      color: black;
+      font-weight: 400;
+      font-size: .9rem;
     }
 
     .beverage-image {
@@ -224,13 +225,13 @@
   flex-direction: row;
   align-items: stretch;
   min-width: 0;
-  min-height: 194px;
+  min-height: 158px;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0;
   text-align: left;
   transition: box-shadow 0.3s;
-  margin: 0 5px 20px;
+  margin: 0 5px 12px;
   background: var(--bg, #fff);
   overflow: hidden;
 
@@ -243,7 +244,7 @@
     flex: 1 1 auto;
     flex-direction: column;
     min-width: 0;
-    padding: 22px;
+    padding: 16px;
   }
 
   .beverage-image img {
@@ -257,10 +258,10 @@
   }
 
   .beverage-image {
-    flex: 0 0 clamp(150px, 22%, 195px);
-    max-width: clamp(150px, 22%, 195px);
+    flex: 0 0 clamp(118px, 20%, 160px);
+    max-width: clamp(118px, 20%, 160px);
     min-width: 0;
-    padding: 16px;
+    padding: 12px;
     background: var(--image-bg, #f5f5f5);
     border-left: 1px solid var(--border);
     box-sizing: border-box;
@@ -270,33 +271,34 @@
   }
 
   .beverage-name {
-    font-size: 1.25rem;
+    font-size: .9rem;
     font-weight: 700;
-    margin: 0 0 8px;
+    margin: 0 0 6px;
     color: var(--text-h);
   }
 
   .beverage-description {
-    font-size: 0.95rem;
+    font-size: 0.78rem;
     color: var(--text);
-    margin: 0 0 12px;
+    margin: 0 0 8px;
   }
 
   .beverage-price {
     margin: auto 0 0;
-    color: var(--accent);
-    font-weight: 700;
+    color: rgb(56, 55, 55);
+    font-weight: 400;
+    font-size: .85rem;
   }
 
   @media (max-width: 600px) {
     .beverage-card-details {
-      padding: 18px;
+      padding: 14px;
     }
 
     .beverage-image {
-      flex-basis: 34%;
-      max-width: 34%;
-      padding: 10px;
+      flex-basis: 30%;
+      max-width: 30%;
+      padding: 8px;
     }
   }
 }
@@ -365,5 +367,118 @@
     bottom: 10px;
     left: 10px;
     padding: 12px;
+  }
+
+  .cart-list {
+    margin: 16px;
+    padding: 16px;
+    list-style: none;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    background: var(--bg);
+    box-shadow: var(--shadow);
+    box-sizing: border-box;
+
+    ul {
+      padding: 0;
+      margin: 0;
+      list-style: none;
+    }
+
+    li {
+      margin-bottom: 8px;
+      font-size: 0.95rem;
+      color: var(--text);
+    }
+
+    cart-item:last-child {
+      margin-bottom: 0;
+      justify-content: space-between;
+    }
+  }
+
+  .cart-summary {
+    position: fixed;
+    right: 16px;
+    bottom: 16px;
+    left: 16px;
+    z-index: 10;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 14px;
+    max-width: 884px;
+    margin: 30px auto;
+    padding: 14px 18px;
+    color: var(--text-h);
+    background: rgba(255, 255, 255, 0.94);
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    box-shadow: var(--shadow);
+    backdrop-filter: blur(12px);
+    box-sizing: border-box;
+
+    .cart-total {
+      font-size: 1rem;
+      font-weight: 700;
+    }
+
+    .checkout-button {
+      padding: 10px 16px;
+      font-size: 0.95rem;
+      font-weight: 700;
+      color: var(--accent);
+      background: var(--accent-bg);
+      border: 1px solid var(--accent-border);
+      border-radius: 8px;
+      cursor: pointer;
+      transition: box-shadow 0.3s;
+
+      &:hover {
+        box-shadow: var(--shadow);
+      }
+    }
+  }
+
+  .overlay-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 16px;
+    margin-top: 16px;
+  }
+
+  .close-button {
+    padding: 5px 10px;
+    font-size: 0.95rem;
+    font-weight: 700;
+    color: var(--accent);
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    border-radius: 8px;
+    cursor: pointer;
+    transition: box-shadow 0.3s;
+
+    &:hover {
+      box-shadow: var(--shadow);
+    }
+  }
+}
+
+.add-to-cart-button {
+  padding: 5px 10px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  max-width: 120px;
+  color: var(--accent);
+  background: var(--accent-bg);
+  margin-top: 12px;
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+
+  &:hover {
+    box-shadow: var(--shadow);
   }
 }
