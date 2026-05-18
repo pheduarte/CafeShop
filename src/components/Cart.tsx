@@ -1,15 +1,21 @@
 import type { hotBeverage } from "../data/hotBeverage";
+import type { NavigationPages } from "./Navigation";
 
 function Cart({
   cartItems,
   setCartItems,
+  setCurrentPage,
 }: {
   cartItems: hotBeverage[];
   setCartItems: React.Dispatch<React.SetStateAction<hotBeverage[]>>;
+  setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
 }) {
+  const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
+  
   function handleRemove(index: number) {
     return cartItems.filter((_, i) => i !== index);
   }
+
 
   return (
     <div>
@@ -39,14 +45,15 @@ function Cart({
 
       <div className="cart-summary">
         <div className="cart-total">
-          <p>
-            Total: $
-            {cartItems
-              .reduce((total, item) => total + item.price, 0)
-              .toFixed(2)}
-          </p>
+          <p>Total: ${cartTotal.toFixed(2)}</p>
         </div>
-        <button className="checkout-button">Checkout</button>
+        <button
+          className="checkout-button"
+          disabled={cartTotal === 0}
+          onClick={() => setCurrentPage("checkout")}
+        >
+          Checkout
+        </button>
       </div>
     </div>
   );
