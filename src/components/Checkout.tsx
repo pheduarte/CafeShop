@@ -26,12 +26,20 @@ export default function Checkout({ setCurrentPage }: CheckoutProps) {
           <input type="text" name="cvv" />
         </label>
       </div>
-      <button className="submit-button" onClick={() => setCurrentPage("home")}>
-        Cancel
-      </button>
-      <button className="submit-button" onClick={() => setCurrentPage("home")}>
-        Pay
-      </button>
+      <div className="checkout-btn-container">
+        <button
+          className="cancel-button"
+          onClick={() => setCurrentPage("home")}
+        >
+          Cancel
+        </button>
+        <button
+          className="submit-button"
+          onClick={() => setCurrentPage("home")}
+        >
+          Pay
+        </button>
+      </div>
     </div>
   );
 }
