@@ -10,4 +10,9 @@ export const navigationItems = [
     label: "Order",
     path: "/order",
   },
+  {
+    id: 3,
+    label: "Contact",
+    path: "/contact",
+  }
 ];
