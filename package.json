@@ -7,10 +7,12 @@
     "dev": "vite",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "server": "json-server -w db.json -p 3001"
   },
   "dependencies": {
     "@tabler/icons-react": "^3.44.0",
+    "json-server": "^1.0.0-beta.15",
     "lucide-react": "^1.16.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6"

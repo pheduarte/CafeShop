@@ -1,4 +1,4 @@
-import type { hotBeverage } from "../data/hotBeverage";
+import type { Beverage } from "../types/beverages";
 import type { NavigationPages } from "./Navigation";
 
 function Cart({
@@ -6,16 +6,15 @@ function Cart({
   setCartItems,
   setCurrentPage,
 }: {
-  cartItems: hotBeverage[];
-  setCartItems: React.Dispatch<React.SetStateAction<hotBeverage[]>>;
+  cartItems: Beverage[];
+  setCartItems: React.Dispatch<React.SetStateAction<Beverage[]>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
 }) {
   const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
-  
+
   function handleRemove(index: number) {
     return cartItems.filter((_, i) => i !== index);
   }
-
 
   return (
     <div>
@@ -25,23 +24,21 @@ function Cart({
         </div>
       ) : (
         <div className="cart-list">
-        <ul>
-          {cartItems.map((item, index) => (
-            <li className="cart-item" key={index}>
-              {item.name} - ${item.price.toFixed(2)}
-              <button
-                className="remove-button"
-                onClick={() => setCartItems(handleRemove(index))}
-              >
-                Remove
-              </button>
-            </li>
-          ))}
-        </ul>
-      </div>
+          <ul>
+            {cartItems.map((item, index) => (
+              <li className="cart-item" key={index}>
+                {item.name} - ${item.price.toFixed(2)}
+                <button
+                  className="remove-button"
+                  onClick={() => setCartItems(handleRemove(index))}
+                >
+                  Remove
+                </button>
+              </li>
+            ))}
+          </ul>
+        </div>
       )}
-
-      
 
       <div className="cart-summary">
         <div className="cart-total">

@@ -1,16 +1,21 @@
 import { useState } from "react";
 import type { NavigationPages } from "./Navigation";
-import type { hotBeverage } from "../data/hotBeverage";
 import { BeverageList } from "./BeverageList";
 import CartBar from "./CartBar";
 import Cart from "./Cart";
+import type { Beverage } from "../types/beverages";
 
 type HomeProps = {
   setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
+  cartItems: Beverage[];
+  setCartItems: React.Dispatch<React.SetStateAction<Beverage[]>>;
 };
 
-export default function Home({ setCurrentPage }: HomeProps) {
-  const [cartItems, setCartItems] = useState<hotBeverage[]>([]);
+export default function Home({
+  setCurrentPage,
+  cartItems,
+  setCartItems,
+}: HomeProps) {
   const [isOpen, setIsOpen] = useState(false);
 
   const toggleCart = () => {
@@ -28,7 +33,11 @@ export default function Home({ setCurrentPage }: HomeProps) {
             </button>
           </div>
 
-          <Cart cartItems={cartItems} setCartItems={setCartItems} setCurrentPage={setCurrentPage}/>
+          <Cart
+            cartItems={cartItems}
+            setCartItems={setCartItems}
+            setCurrentPage={setCurrentPage}
+          />
         </div>
       ) : (
         <div className="overlay">

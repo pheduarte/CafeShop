@@ -1,10 +1,20 @@
 import type { NavigationPages } from "./Navigation";
+import type { Beverage } from "../types/beverages";
 
 type CheckoutProps = {
   setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
+  removeCartItems: React.Dispatch<React.SetStateAction<Beverage[]>>;
 };
 
-export default function Checkout({ setCurrentPage }: CheckoutProps) {
+export default function Checkout({
+  setCurrentPage,
+  removeCartItems,
+}: CheckoutProps) {
+  const handlePayment = () => {
+    removeCartItems([]);
+    setCurrentPage("home");
+  };
+
   return (
     <div>
       <h1>CHECKOUT</h1>
@@ -33,10 +43,7 @@ export default function Checkout({ setCurrentPage }: CheckoutProps) {
         >
           Cancel
         </button>
-        <button
-          className="submit-button"
-          onClick={() => setCurrentPage("home")}
-        >
+        <button className="submit-button" onClick={handlePayment}>
           Pay
         </button>
       </div>

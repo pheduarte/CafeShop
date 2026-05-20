@@ -1,8 +1,8 @@
-import type { hotBeverage } from "../data/hotBeverage";
+import type { Beverage } from "../types/beverages";
 
 type BeverageCardProps = {
-  beverage: hotBeverage;
-  onAddToCart: (beverage: hotBeverage) => void;
+  beverage: Beverage;
+  onAddToCart: (beverage: Beverage) => void;
 };
 
 function BeverageCard({ beverage, onAddToCart }: BeverageCardProps) {
@@ -12,7 +12,10 @@ function BeverageCard({ beverage, onAddToCart }: BeverageCardProps) {
         <h3 className="beverage-name">{beverage.name}</h3>
         <p className="beverage-description">{beverage.description}</p>
         <p className="beverage-price">${beverage.price.toFixed(2)}</p>
-        <button className="add-to-cart-button" onClick={() => onAddToCart(beverage)}>
+        <button
+          className="add-to-cart-button"
+          onClick={() => onAddToCart(beverage)}
+        >
           Add to order
         </button>
       </div>

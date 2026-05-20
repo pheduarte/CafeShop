@@ -1,23 +1,29 @@
 import Home from "./Home";
 import Checkout from "./Checkout";
 import { useState } from "react";
+import { useLocalStorage } from "../hooks/useLocalStorage";
+import type { Beverage } from "../types/beverages";
 
-export type NavigationPages = "home" | "cart" | "checkout";
+export type NavigationPages = "home" | "checkout";
 
 type NavigationProps = {
   navigation: NavigationPages;
 };
 
 function Navigation({ navigation }: NavigationProps) {
+  const [cartItems, setCartItems, removeCartItems] = useLocalStorage<
+    Beverage[]
+  >("cart-items", []);
+
   const [currentPage, setCurrentPage] = useState<NavigationPages>(navigation);
 
   return (
-    <div>
-      {currentPage === "home" && <Home setCurrentPage={setCurrentPage} />}
+    <>
+      {currentPage === "home" && <Home setCurrentPage={setCurrentPage} cartItems={cartItems} setCartItems={setCartItems} />}
       {currentPage === "checkout" && (
-        <Checkout setCurrentPage={setCurrentPage} />
+        <Checkout setCurrentPage={setCurrentPage} removeCartItems={removeCartItems} />
       )}
-    </div>
+    </>
   );
 }
 

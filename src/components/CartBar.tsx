@@ -1,7 +1,7 @@
 import { IconShoppingCart } from "@tabler/icons-react";
-import type { hotBeverage } from "../data/hotBeverage";
+import type { Beverage } from "../types/beverages";
 
-function CartBar({ cartItems }: { cartItems: hotBeverage[] }) {
+function CartBar({ cartItems }: { cartItems: Beverage[] }) {
   return (
     <div className="cart-bar">
       <div className="cart-bar-copy">
