@@ -43,7 +43,6 @@ export function BeverageList({
   //   return <p>{error}</p>;
   // }
 
-
   // Function to handle adding a beverage to the cart
   function addToCart(beverage: Beverage) {
     setCartItems((currentItems) => [...currentItems, beverage]);
@@ -58,37 +57,43 @@ export function BeverageList({
     (beverage) => beverage.type === "hot",
   );
   // Change allBeverages to beverages when using the API fetching logic
-  const specialBeverages = allBeverages.filter((beverages) => beverages.type === "special");
+  const specialBeverages = allBeverages.filter(
+    (beverages) => beverages.type === "special",
+  );
 
   return (
     <div>
       <Header />
-      <div className="beverage-list">
-        <div>{hotBeverages.length > 0 && <h2>Hot Beverages</h2>}</div>
-        {hotBeverages.map((beverage) => (
-          <BeverageCard
-            key={beverage.id}
-            beverage={beverage}
-            onAddToCart={addToCart}
-          />
-        ))}
-        <div>{icedBeverages.length > 0 && <h2>Iced Beverages</h2>}</div>
-        {icedBeverages.map((beverage) => (
-          <BeverageCard
-            key={beverage.id}
-            beverage={beverage}
-            onAddToCart={addToCart}
-          />
-        ))}
-        <div>{specialBeverages.length > 0 && <h2>Specialty Beverages</h2>}</div>
-        {specialBeverages.map((beverage) => (
-          <BeverageCard
-            key={beverage.id}
-            beverage={beverage}
-            onAddToCart={addToCart}
-          />
-        ))}
-      </div>
+      <section>
+        <div className="beverage-list">
+          <div>{hotBeverages.length > 0 && <h2>Hot Beverages</h2>}</div>
+          {hotBeverages.map((beverage) => (
+            <BeverageCard
+              key={beverage.id}
+              beverage={beverage}
+              onAddToCart={addToCart}
+            />
+          ))}
+          <div>{icedBeverages.length > 0 && <h2>Iced Beverages</h2>}</div>
+          {icedBeverages.map((beverage) => (
+            <BeverageCard
+              key={beverage.id}
+              beverage={beverage}
+              onAddToCart={addToCart}
+            />
+          ))}
+          <div>
+            {specialBeverages.length > 0 && <h2>Specialty Beverages</h2>}
+          </div>
+          {specialBeverages.map((beverage) => (
+            <BeverageCard
+              key={beverage.id}
+              beverage={beverage}
+              onAddToCart={addToCart}
+            />
+          ))}
+        </div>
+      </section>
     </div>
   );
 }

@@ -40,7 +40,7 @@ export default function Home({
           />
         </div>
       ) : (
-        <div className="overlay">
+        <div className="home-overlay">
           <BeverageList setCartItems={setCartItems} />
           <button onClick={toggleCart}>
             <CartBar cartItems={cartItems} />

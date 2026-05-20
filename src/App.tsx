@@ -1,13 +1,16 @@
 import "./App.css";
 import Navigation from "./components/Navigation";
-
+import Drawer from "./components/Drawer";
+import { DrawerProvider } from "./context/DrawerProvider";
 
 function App() {
-
   return (
-    <main className="App">
-      <Navigation navigation="home" />
-    </main>
+    <DrawerProvider>
+      <main className="App">
+        <Navigation navigation="home" />
+      </main>
+      <Drawer />
+    </DrawerProvider>
   );
 }
 

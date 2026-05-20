@@ -1,12 +1,18 @@
-import { IconMugFilled } from "@tabler/icons-react";
+import { IconMenu2, IconMugFilled } from "@tabler/icons-react";
+import { useDrawer } from "../hooks/useDrawer";
 
 function Header() {
-    return (
-        <header className="header">
-            <h1>Cafe Shop</h1>
-            <IconMugFilled />
-        </header>
-    );
+  const { openDrawer } = useDrawer();
+
+  return (
+    <header className="header">
+      <IconMenu2 className="header-menu" stroke={2} onClick={openDrawer} />
+      <div className="header-title">
+        <h1>Cafe Shop</h1>
+        <IconMugFilled />
+      </div>
+    </header>
+  );
 }
 
 export default Header;

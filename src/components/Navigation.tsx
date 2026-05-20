@@ -19,9 +19,18 @@ function Navigation({ navigation }: NavigationProps) {
 
   return (
     <>
-      {currentPage === "home" && <Home setCurrentPage={setCurrentPage} cartItems={cartItems} setCartItems={setCartItems} />}
+      {currentPage === "home" && (
+        <Home
+          setCurrentPage={setCurrentPage}
+          cartItems={cartItems}
+          setCartItems={setCartItems}
+        />
+      )}
       {currentPage === "checkout" && (
-        <Checkout setCurrentPage={setCurrentPage} removeCartItems={removeCartItems} />
+        <Checkout
+          setCurrentPage={setCurrentPage}
+          removeCartItems={removeCartItems}
+        />
       )}
     </>
   );
