@@ -1,5 +1,5 @@
 
-export const navigationItems = [
+export const drawerNavigationItems = [
   {
     id: 1,
     label: "Store info",

@@ -1,4 +1,4 @@
-import { navigationItems } from "../data/navigation";
+import { drawerNavigationItems } from "../data/drawerItems";
 import { useDrawer } from "../hooks/useDrawer";
 import { IconX } from "@tabler/icons-react";
 
@@ -17,7 +17,7 @@ export default function Drawer() {
         </div>
 
         <nav>
-          {navigationItems.map((item) => (
+          {drawerNavigationItems.map((item) => (
             <button key={item.id} className="drawer-item">
               {item.label}
             </button>
