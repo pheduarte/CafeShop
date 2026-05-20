@@ -7,9 +7,14 @@ function CartBar({ cartItems }: { cartItems: Beverage[] }) {
       <div className="cart-bar-copy">
         <h2>Cart</h2>
         {cartItems.length > 0 ? (
-          <p>{cartItems.length} item(s) in your cart. - Total: ${cartItems.reduce((total, item) => total + item.price, 0).toFixed(2)}</p>
+          <p>
+            {cartItems.length} item(s) in your cart. - Total: $
+            {cartItems
+              .reduce((total, item) => total + item.price, 0)
+              .toFixed(2)}
+          </p>
         ) : (
-        <p>Your cart is empty.</p>
+          <p>Your cart is empty.</p>
         )}
       </div>
       <div className="cart-bar-icon">

@@ -2,7 +2,7 @@
 // import { getBeverages } from "../api/beverages";
 import type { Beverage } from "../types/beverages";
 import BeverageCard from "../ui/BeverageCard";
-import Header from "./Header";
+// import Header from "./Header";
 import { allBeverages } from "../api/litsOfBeverages";
 
 export function BeverageList({
@@ -63,7 +63,6 @@ export function BeverageList({
 
   return (
     <div>
-      <Header />
       <section>
         <div className="beverage-list">
           <div>{hotBeverages.length > 0 && <h2>Hot Beverages</h2>}</div>

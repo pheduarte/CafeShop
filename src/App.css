@@ -220,6 +220,12 @@
   padding: 0 16px 104px;
 }
 
+.beverage-list h2 {
+  position: sticky;
+  margin: 12px 10px;
+  font-size: 1.25rem;
+}
+
 .beverage-card {
   display: flex;
   flex-direction: row;
@@ -305,9 +311,9 @@
 
 .cart-bar {
   position: fixed;
-  right: 10px;
-  bottom: env(safe-area-inset-bottom);
-  left: 10px;
+  right: 16px;
+  bottom: calc(env(safe-area-inset-bottom) + 12px);
+  left: 16px;
   z-index: 10;
   display: flex;
   flex-direction: row;
@@ -560,6 +566,9 @@
 
 .header {
   position: relative;
+  top: 0;
+  left: 0;
+  right: 0;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -598,6 +607,8 @@
   width: 100%;
   max-width: 400px;
   height: 100vh;
+  height: 100dvh;
+  max-height: 100dvh;
   background: var(--code-bg);
   transition: left 0.3s ease;
   z-index: 1000;
@@ -637,17 +648,20 @@
 
 .drawer-footer {
   margin-top: auto;
-  padding: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+  padding: 1rem 1rem calc(env(safe-area-inset-bottom) + 1rem);
   display: flex;
   gap: 1rem;
+  align-items: center;
 }
 
+.drawer-footer-button-login,
 .drawer-footer-button-signup {
+  flex: 1;
   padding: 8px 12px;
   font-size: 0.95rem;
   font-weight: 400;
-  color: var(--bg);
-  background: var(--accent);
   border: 1px solid var(--accent-border);
   border-radius: 8px;
   cursor: pointer;
@@ -659,19 +673,11 @@
 }
 
 .drawer-footer-button-login {
-  padding: 1rem 1rem calc(env(safe-area-inset-bottom) + 1rem);
-  font-size: 0.95rem;
-  font-weight: 400;
   color: var(--accent);
   background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
-  border-radius: 8px;
-  cursor: pointer;
-  transition: box-shadow 0.3s;
-  
-
-  &:hover {
-    box-shadow: var(--shadow);
-  }
 }
 
+.drawer-footer-button-signup {
+  color: var(--bg);
+  background: var(--accent);
+}

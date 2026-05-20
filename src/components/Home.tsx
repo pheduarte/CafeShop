@@ -4,6 +4,7 @@ import { BeverageList } from "./BeverageList";
 import CartBar from "./CartBar";
 import Cart from "./Cart";
 import type { Beverage } from "../types/beverages";
+import Header from "./Header";
 
 type HomeProps = {
   setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
@@ -23,30 +24,37 @@ export default function Home({
   };
 
   return (
-    <div>
-      {isOpen ? (
+    <>
+      <header className="home-header">
+        <Header />
+      </header>
+      <section>
         <div>
-          <div className="overlay-header">
-            <p>Review Your Order</p>
-            <button className="close-button" onClick={toggleCart}>
-              x
-            </button>
-          </div>
+          {isOpen ? (
+            <div>
+              <div className="overlay-header">
+                <p>Review Your Order</p>
+                <button className="close-button" onClick={toggleCart}>
+                  x
+                </button>
+              </div>
 
-          <Cart
-            cartItems={cartItems}
-            setCartItems={setCartItems}
-            setCurrentPage={setCurrentPage}
-          />
+              <Cart
+                cartItems={cartItems}
+                setCartItems={setCartItems}
+                setCurrentPage={setCurrentPage}
+              />
+            </div>
+          ) : (
+            <div className="home-overlay">
+              <BeverageList setCartItems={setCartItems} />
+              <button onClick={toggleCart}>
+                <CartBar cartItems={cartItems} />
+              </button>
+            </div>
+          )}
         </div>
-      ) : (
-        <div className="home-overlay">
-          <BeverageList setCartItems={setCartItems} />
-          <button onClick={toggleCart}>
-            <CartBar cartItems={cartItems} />
-          </button>
-        </div>
-      )}
-    </div>
+      </section>
+    </>
   );
 }
