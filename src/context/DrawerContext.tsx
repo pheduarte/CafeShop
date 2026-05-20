@@ -6,5 +6,4 @@ export type DrawerContextType = {
   closeDrawer: () => void;
 };
 
-export const DrawerContext =
-  createContext<DrawerContextType | null>(null);
+export const DrawerContext = createContext<DrawerContextType | null>(null);

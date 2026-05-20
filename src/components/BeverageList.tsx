@@ -1,9 +1,10 @@
-// import { useEffect, useState } from "react";
+import { useState } from "react";
 // import { getBeverages } from "../api/beverages";
 import type { Beverage } from "../types/beverages";
 import BeverageCard from "../ui/BeverageCard";
 // import Header from "./Header";
 import { allBeverages } from "../api/litsOfBeverages";
+import BeverageDetails from "./BeverageDetails";
 
 export function BeverageList({
   setCartItems,
@@ -48,6 +49,19 @@ export function BeverageList({
     setCartItems((currentItems) => [...currentItems, beverage]);
   }
 
+  // Function to handle showing beverage details
+  const [selectedBeverage, setSelectedBeverage] = useState<Beverage | null>(
+    null,
+  );
+
+  function showDetails(beverage: Beverage) {
+    setSelectedBeverage(beverage);
+  }
+
+  function closeDetails() {
+    setSelectedBeverage(null);
+  }
+
   // Change allBeverages to beverages when using the API fetching logic
   const icedBeverages = allBeverages.filter(
     (beverage) => beverage.type === "cold",
@@ -71,6 +85,7 @@ export function BeverageList({
               key={beverage.id}
               beverage={beverage}
               onAddToCart={addToCart}
+              onShowDetails={showDetails}
             />
           ))}
           <div>{icedBeverages.length > 0 && <h2>Iced Beverages</h2>}</div>
@@ -79,6 +94,7 @@ export function BeverageList({
               key={beverage.id}
               beverage={beverage}
               onAddToCart={addToCart}
+              onShowDetails={showDetails}
             />
           ))}
           <div>
@@ -89,10 +105,30 @@ export function BeverageList({
               key={beverage.id}
               beverage={beverage}
               onAddToCart={addToCart}
+              onShowDetails={showDetails}
             />
           ))}
         </div>
       </section>
+      // Show beverage details in an overlay/modal when a beverage is selected
+      {selectedBeverage && (
+        <div className="beverage-details-overlay" onClick={closeDetails}>
+          <div
+            className="beverage-details-modal"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="close-button-container">
+              <button className="close-button " onClick={closeDetails}>
+                ×
+              </button>
+            </div>
+            <BeverageDetails
+              beverage={selectedBeverage}
+              onAddToCart={addToCart}
+            />
+          </div>
+        </div>
+      )}
     </div>
   );
 }
