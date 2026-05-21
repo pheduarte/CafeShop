@@ -1,9 +1,33 @@
 import { drawerNavigationItems } from "../data/drawerItems";
 import { useDrawer } from "../hooks/useDrawer";
 import { IconX } from "@tabler/icons-react";
+import SignUp from "./SignUp";
+import type { User } from "../types/user";
+import { useState } from "react";
 
-export default function Drawer() {
+type DrawerProps = {
+  user?: User;
+  onSignUp: (user: User) => void;
+};
+
+export default function Drawer({ user, onSignUp }: DrawerProps) {
   const { isOpen, closeDrawer } = useDrawer();
+
+  const [showSignUp, setShowSignUp] = useState(false);
+
+  function openSignUp() {
+    closeDrawer();
+    setShowSignUp(true);
+  }
+
+  function closeSignUp() {
+    setShowSignUp(false);
+  }
+
+  function handleSignUp (user: User) {
+    closeSignUp();
+    onSignUp(user);
+  };
 
   return (
     <>
@@ -25,10 +49,31 @@ export default function Drawer() {
         </nav>
 
         <div className="drawer-footer">
-          <button className="drawer-footer-button-login" >Log in</button>
-          <button className="drawer-footer-button-signup">Sign up</button>
+          <button className="drawer-footer-button-login">Log in</button>
+          <button
+            className="drawer-footer-button-signup"
+            onClick={openSignUp}
+          >
+            Sign up
+          </button>
         </div>
       </aside>
+
+      {showSignUp && (
+        <div className="beverage-details-overlay" onClick={closeSignUp}>
+          <div
+            className="beverage-details-modal"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="close-button-container">
+              <button className="close-button " onClick={closeSignUp}>
+                ×
+              </button>
+            </div>
+            <SignUp user={user} onSignUp={handleSignUp} />
+          </div>
+        </div>
+      )}
     </>
   );
 }
