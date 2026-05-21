@@ -1,12 +1,12 @@
 :root {
-  --text: #6b6375;
-  --text-h: #08060d;
+  --text: #7e7687;
+  --text-h: #b33874;
   --bg: #f4f3ec;
   --border: #e5e4e7;
   --code-bg: #f4f3ec;
-  --accent: #8f7c11;
-  --accent-bg: rgba(153, 162, 129, 0.1);
-  --accent-border: rgb(177, 118, 29);
+  --accent: #7e1e51;
+  --accent-bg: rgba(200, 109, 173, 0.1);
+  --accent-border: rgba(124, 18, 71, 0.713);
   --social-bg: rgba(244, 243, 236, 0.5);
   --shadow:
     rgba(0, 0, 0, 0.1) 0 10px 15px -3px, rgba(0, 0, 0, 0.05) 0 4px 6px -2px;

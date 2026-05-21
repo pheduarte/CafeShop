@@ -8,7 +8,7 @@ function Header() {
     <header className="header">
       <IconMenu2 className="header-menu" stroke={2} onClick={openDrawer} />
       <div className="header-title">
-        <h1>Cafe Shop</h1>
+        <h1>Café Shop</h1>
         <IconMugFilled />
       </div>
     </header>

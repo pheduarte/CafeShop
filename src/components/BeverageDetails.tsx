@@ -3,9 +3,10 @@ import type { Beverage } from "../types/beverages";
 type BeverageDetailsProps = {
   beverage: Beverage;
   onAddToCart: (beverage: Beverage) => void;
+  closeDetails: () => void;
 };
 
-function BeverageDetails({ beverage, onAddToCart }: BeverageDetailsProps) {
+function BeverageDetails({ beverage, onAddToCart, closeDetails }: BeverageDetailsProps) {
   return (
     <section className="beverage-details">
       <div>
@@ -23,6 +24,7 @@ function BeverageDetails({ beverage, onAddToCart }: BeverageDetailsProps) {
         onSubmit={(e) => {
           e.preventDefault();
           onAddToCart(beverage);
+          closeDetails();
         }}
       >
         <label> Special Instructions: </label>

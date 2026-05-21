@@ -4,6 +4,7 @@ import { IconX } from "@tabler/icons-react";
 import SignUp from "./SignUp";
 import type { User } from "../types/user";
 import { useState } from "react";
+import { IconMugFilled } from "@tabler/icons-react";
 
 type DrawerProps = {
   user?: User;
@@ -24,10 +25,10 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
     setShowSignUp(false);
   }
 
-  function handleSignUp (user: User) {
+  function handleSignUp(user: User) {
     closeSignUp();
     onSignUp(user);
-  };
+  }
 
   return (
     <>
@@ -35,7 +36,9 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
 
       <aside className={`drawer ${isOpen ? "open" : ""}`}>
         <div className="drawer-header">
-          <h2>Café Shop</h2>
+          <div className="drawer-title">
+            <IconMugFilled />
+          </div>
 
           <IconX stroke={2} onClick={closeDrawer} />
         </div>
@@ -50,10 +53,7 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
 
         <div className="drawer-footer">
           <button className="drawer-footer-button-login">Log in</button>
-          <button
-            className="drawer-footer-button-signup"
-            onClick={openSignUp}
-          >
+          <button className="drawer-footer-button-signup" onClick={openSignUp}>
             Sign up
           </button>
         </div>

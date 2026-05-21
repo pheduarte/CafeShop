@@ -84,7 +84,6 @@ export function BeverageList({
             <BeverageCard
               key={beverage.id}
               beverage={beverage}
-              onAddToCart={addToCart}
               onShowDetails={showDetails}
             />
           ))}
@@ -93,7 +92,6 @@ export function BeverageList({
             <BeverageCard
               key={beverage.id}
               beverage={beverage}
-              onAddToCart={addToCart}
               onShowDetails={showDetails}
             />
           ))}
@@ -104,7 +102,6 @@ export function BeverageList({
             <BeverageCard
               key={beverage.id}
               beverage={beverage}
-              onAddToCart={addToCart}
               onShowDetails={showDetails}
             />
           ))}
@@ -125,6 +122,7 @@ export function BeverageList({
             <BeverageDetails
               beverage={selectedBeverage}
               onAddToCart={addToCart}
+              closeDetails={closeDetails}
             />
           </div>
         </div>

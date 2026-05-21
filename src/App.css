@@ -50,7 +50,7 @@
     text-align: left;
     transition: box-shadow 0.3s;
     margin: 0 5px 20px;
-    background: var(--bg, #fff);
+    background: #fff;
     overflow: hidden;
 
     &:hover {
@@ -63,6 +63,7 @@
       flex: 1 1 auto;
       min-width: 0;
       padding: 22px;
+      background: #fff;
     }
 
     .beverage-name {
@@ -80,7 +81,7 @@
 
     .beverage-price {
       margin: auto 0 0;
-      color: black;
+      color: var(--text-h);
       font-weight: 400;
       font-size: 0.9rem;
     }
@@ -217,7 +218,7 @@
   display: flex;
   flex-direction: column;
   gap: 0;
-  padding: 0 16px 104px;
+  padding: 0 1px 104px;
 }
 
 .beverage-list h2 {
@@ -231,13 +232,13 @@
   flex-direction: row;
   align-items: stretch;
   min-width: 0;
-  min-height: 158px;
+  min-height: 150px;
   border: 1px solid var(--border);
   border-radius: 8px;
   padding: 0;
   text-align: left;
   transition: box-shadow 0.3s;
-  margin: 0 5px 12px;
+  margin: 0 5px 2px;
   background: var(--bg, #fff);
   overflow: hidden;
 
@@ -251,29 +252,31 @@
     flex-direction: column;
     min-width: 0;
     padding: 14px;
+    background: #fff;
   }
 
   .beverage-image img {
     width: 100%;
-    max-width: 100%;
     height: 100%;
+    object-fit: cover;
     display: block;
-    object-fit: contain;
-    border-radius: 6px;
-    margin: 0;
   }
 
   .beverage-image {
-    flex: 0 0 clamp(96px, 18%, 132px);
-    max-width: clamp(96px, 18%, 132px);
-    min-width: 0;
-    padding: 8px;
+    flex: 0 0 clamp(140px, 40%, 220px);
+    max-width: clamp(140px, 40%, 220px);
+
+    padding: 0;
+
     background: var(--image-bg, #f5f5f5);
+
     border-left: 1px solid var(--border);
-    box-sizing: border-box;
+
     display: flex;
     align-items: center;
     justify-content: center;
+
+    overflow: hidden;
   }
 
   .beverage-name {
@@ -291,7 +294,7 @@
 
   .beverage-price {
     margin: auto 0 0;
-    color: rgb(56, 55, 55);
+    color: var(--text-h);
     font-weight: 400;
     font-size: 0.85rem;
   }
@@ -384,10 +387,17 @@
     color: var(--text);
   }
 
-  cart-item:last-child {
+  .cart-item:last-child {
     margin-bottom: 0;
     justify-content: space-between;
   }
+}
+
+.cart-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
 }
 
 .cart-summary {
@@ -559,9 +569,11 @@
   font-size: 0.75rem;
   font-weight: 500;
   color: var(--accent);
-  border-radius: 6px;
   cursor: pointer;
   margin-left: 100px;
+  background: transparent;
+  box-shadow: none;
+  border: none;
 }
 
 .header {
@@ -636,6 +648,15 @@
   border-bottom: var(--border) 1px solid;
 }
 
+.drawer-title {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--accent);
+}
+
 .drawer-item {
   width: 100%;
   padding: 1rem;
@@ -644,6 +665,7 @@
   text-align: left;
   font-size: 1rem;
   cursor: pointer;
+  color: var(--text);
 }
 
 .drawer-footer {
