@@ -13,7 +13,7 @@ function SignUp({ user, onSignUp }: SignUpProps) {
     email: "",
     mobile: "",
     password: "",
-  });
+  }); 
 
   return (
     <section className="signup-details">
