@@ -793,29 +793,6 @@ h1 {
   margin-top: 1rem;
 }
 
-/* --- Sign Up Details --- */
-
-.signup-details {
-  inset: 0;
-  background: rgba(35, 30, 20, 0.18);
-  backdrop-filter: blur(1px);
-  z-index: 1000;
-
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-}
-
-.signup-details input {
-  margin-top: 8px;
-  padding: 8px 12px;
-  font-size: 16px;
-  border: 1px solid var(--border);
-  border-radius: 6px;
-  background: var(--bg);
-  color: var(--text);
-}
 
 /* --- Store Info --- */
 .store-info-card-header {

@@ -1,0 +1,83 @@
+/* --- Sign In Details --- */
+
+.signin-details {
+  position: fixed;
+  inset: 0;
+  background: rgba(35, 30, 20, 0.18);
+  backdrop-filter: blur(1px);
+  z-index: 1000;
+
+  font-size: var(--font-label);
+  font-weight: 700;
+
+  display: flex;
+  flex-flow: column;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.signin-details input {
+  margin-top: 2px;
+  margin-bottom: 15px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+}
+
+.user-details-signin {
+  display: flex;
+  flex-direction: column;
+  padding: 12px;
+  width: 100%;
+  max-width: 400px;
+  background: #f8f3e8;
+  border-radius: 12px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+
+  @media (min-width: 768px) {
+    max-width: 450px;
+    padding: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 500px;
+    padding: 32px;
+  }
+}
+
+.signin-button {
+  padding: 10px 12px;
+  font-size: var(--font-label);
+  font-weight: 700;
+  color: var(--accent);
+  background: var(--accent-bg);
+  border: 1px solid var(--accent-border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: box-shadow 0.3s;
+  margin-top: 1rem;
+
+  &:hover {
+    box-shadow: var(--shadow);
+  }
+}
+
+.close-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 12px;
+}
+
+.error-message {
+  padding: 12px;
+  margin-bottom: 12px;
+  background-color: #fee;
+  border: 1px solid #fcc;
+  border-radius: 6px;
+  color: #c33;
+  font-size: 0.9rem;
+  font-weight: 500;
+}
