@@ -1,22 +1,37 @@
 import type { NavigationPages } from "./Navigation";
 import type { Beverage } from "../types/beverages";
+import { useState } from "react";
+import OrderConfirmationCard from "./Checkout/OrderConfirmation";
 
 type CheckoutProps = {
   setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
   removeCartItems: React.Dispatch<React.SetStateAction<Beverage[]>>;
+  closeCard: () => void;
 };
 
 export default function Checkout({
   setCurrentPage,
   removeCartItems,
 }: CheckoutProps) {
-  const handlePayment = () => {
+  // const handlePayment = () => {
+  //   removeCartItems([]);
+  //   setCurrentPage("home");
+  // };
+
+  const [cardOpen, setCardOpen] = useState(false);
+
+  function openCard() {
+    setCardOpen(true);
+  }
+
+  function closeCard() {
+    setCardOpen(false);
     removeCartItems([]);
     setCurrentPage("home");
-  };
+  }
 
   return (
-    <div>
+    <>
       <h1>CHECKOUT</h1>
       <div className="checkout-form">
         <label>
@@ -43,10 +58,21 @@ export default function Checkout({
         >
           Cancel
         </button>
-        <button className="submit-button" onClick={handlePayment}>
+        <button className="submit-button" onClick={openCard}>
           Pay
         </button>
       </div>
-    </div>
+
+      {cardOpen && (
+        <div className="store-info-overlay" onClick={closeCard}>
+          <div
+            className={`store-info-modal ${cardOpen ? "open" : ""}`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <OrderConfirmationCard closeCard={closeCard} />
+          </div>
+        </div>
+      )}
+    </>
   );
 }

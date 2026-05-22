@@ -1,0 +1,19 @@
+.order-card-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--accent);
+
+  p {
+    font-size: 2rem;
+  }
+}
+
+.order-message {
+    display: flex;
+    justify-content: center;
+    border-top: var(--border) 1px solid;
+    margin-top: 2rem;
+    padding: 1rem;
+}
