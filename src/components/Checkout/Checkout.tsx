@@ -1,17 +1,14 @@
-import type { NavigationPages } from "./Navigation";
-import type { Beverage } from "../types/beverages";
+import type { NavigationPages } from "../Navigation";
 import { useState } from "react";
-import OrderConfirmationCard from "./Checkout/OrderConfirmation";
+import OrderConfirmationCard from "./OrderConfirmation";
+import "./checkout.scss";
 
 type CheckoutProps = {
-  setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
-  removeCartItems: React.Dispatch<React.SetStateAction<Beverage[]>>;
+  setCurrentPage?: React.Dispatch<React.SetStateAction<NavigationPages>>;
+  removeCartItems?: () => void;
 };
 
-export default function Checkout({
-  setCurrentPage,
-  removeCartItems,
-}: CheckoutProps) {
+export default function Checkout(_props: CheckoutProps) {
   // const handlePayment = () => {
   //   removeCartItems([]);
   //   setCurrentPage("home");
@@ -25,8 +22,8 @@ export default function Checkout({
 
   function closeCard() {
     setCardOpen(false);
-    removeCartItems([]);
-    setCurrentPage("home");
+    // removeCartItems([]);
+    // setCurrentPage("home");
   }
 
   return (
@@ -53,7 +50,7 @@ export default function Checkout({
       <div className="checkout-btn-container">
         <button
           className="cancel-button"
-          onClick={() => setCurrentPage("home")}
+          // onClick={() => setCurrentPage("home")}
         >
           Cancel
         </button>
