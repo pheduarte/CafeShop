@@ -1,4 +1,4 @@
-import "./signin.scss";
+import "./signIn.scss";
 import { useState } from "react";
 import type { User } from "../../types/user";
 import { signInUser } from "../../api/userApi";
