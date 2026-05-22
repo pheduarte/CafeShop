@@ -48,7 +48,7 @@ function SignIn({ onSignIn, closeSignIn }: SignInProps) {
     <section className="signin-details">
       <div className="close-button-container">
         <button className="close-button" onClick={closeSignIn}>
-          ×
+           ×
         </button>
       </div>
       <div>
