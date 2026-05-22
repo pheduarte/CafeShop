@@ -64,9 +64,9 @@ export default function Checkout({
       </div>
 
       {cardOpen && (
-        <div className="store-info-overlay" onClick={closeCard}>
+        <div className="order-card-overlay" onClick={closeCard}>
           <div
-            className={`store-info-modal ${cardOpen ? "open" : ""}`}
+            className={`order-card-modal ${cardOpen ? "open" : ""}`}
             onClick={(event) => event.stopPropagation()}
           >
             <OrderConfirmationCard closeCard={closeCard} />
