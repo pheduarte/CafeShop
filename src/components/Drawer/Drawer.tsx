@@ -2,20 +2,22 @@ import { drawerNavigationItems } from "../../data/drawerItems";
 import { useDrawer } from "../../hooks/useDrawer";
 import { IconX } from "@tabler/icons-react";
 import SignUp from "./SignUp";
+import SignIn from "./SignIn";
 import type { User } from "../../types/user";
 import { useState } from "react";
 import StoreInfo from "./StoreInfo";
 
-
 type DrawerProps = {
   user?: User;
   onSignUp: (user: User) => void;
+  onSignIn: (user: User) => void;
 };
 
-export default function Drawer({ user, onSignUp }: DrawerProps) {
+export default function Drawer({ user, onSignUp, onSignIn }: DrawerProps) {
   const { isOpen, closeDrawer } = useDrawer();
 
   const [showSignUp, setShowSignUp] = useState(false);
+  const [showSignIn, setShowSignIn] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
 
   function openSignUp() {
@@ -30,6 +32,20 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
   function handleSignUp(user: User) {
     closeSignUp();
     onSignUp(user);
+  }
+
+  function openSignIn() {
+    closeDrawer();
+    setShowSignIn(true);
+  }
+
+  function closeSignIn() {
+    setShowSignIn(false);
+  }
+
+  function handleSignIn(user: User) {
+    closeSignIn();
+    onSignIn(user);
   }
 
   function openStoreInfo() {
@@ -48,7 +64,11 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
       <aside className={`drawer ${isOpen ? "open" : ""}`}>
         <div className="drawer-header">
           <div className="drawer-title">
-            <img src="/images/logo.jpeg" alt="Café Shop Logo" className="drawer-logo" />
+            <img
+              src="/images/logo.jpeg"
+              alt="Café Shop Logo"
+              className="drawer-logo"
+            />
           </div>
 
           <IconX stroke={2} onClick={closeDrawer} />
@@ -73,7 +93,9 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
         </nav>
 
         <div className="drawer-footer">
-          <button className="drawer-footer-button-login">Log in</button>
+          <button className="drawer-footer-button-login" onClick={openSignIn}>
+            Log in
+          </button>
           <button className="drawer-footer-button-signup" onClick={openSignUp}>
             Sign up
           </button>
@@ -92,6 +114,17 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
               </button>
             </div>
             <SignUp user={user} onSignUp={handleSignUp} />
+          </div>
+        </div>
+      )}
+
+      {showSignIn && (
+        <div className="beverage-details-overlay" onClick={closeSignIn}>
+          <div
+            className="beverage-details-modal"
+            onClick={(event) => event.stopPropagation()}
+          >
+            <SignIn onSignIn={handleSignIn} closeSignIn={closeSignIn} />
           </div>
         </div>
       )}
