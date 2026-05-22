@@ -788,3 +788,91 @@
   background: var(--bg);
   color: var(--text);
 }
+
+/* --- Store Info --- */
+.store-info-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(35, 30, 20, 0.18);
+  backdrop-filter: blur(1px);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+}
+
+.store-info-modal {
+  display: flex;
+  flex-direction: column;
+  background: #f8f3e8;
+  width: 100%;
+  max-width: 100%;
+  min-height: 45vh;
+  border-radius: 20px 20px 0 0;
+  padding: 1.2rem;
+  box-sizing: border-box;
+  transform: translateY(40px) scale(0.98);
+  opacity: 0;
+  transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+.store-info-modal.open {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.store-info-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: 2px;
+
+  h2 {
+    margin: 0;
+    font-size: 1.25rem;
+    color: var(--text-h);
+  }
+  p {
+    font-size: var(--font-description);
+  }
+}
+
+.store-info-trading-hours {
+  margin-bottom: 8px;
+  border-top: var(--border) 1px solid;
+  padding-top: 10px;
+
+  .store-info-trading-hours-content {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1px 10px;
+    font-size: var(--font-description);
+  }
+}
+
+.store-info-ordering-specifics {
+  margin-bottom: 8px;
+  border-top: var(--border) 1px solid;
+  padding-top: 10px;
+}
+
+.store-info-ordering-specifics-content {
+  font-size: var(--font-description);
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+}
+
+.hours-day {
+  box-sizing: border-box;
+  padding: 1px 0;
+  font-size: var(--font-description);
+}
+
+.store-info-title {
+  font-weight: 700;
+  color: var(--text-h);
+  margin-bottom: 6px;
+}

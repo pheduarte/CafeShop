@@ -1,10 +1,11 @@
-import { drawerNavigationItems } from "../data/drawerItems";
-import { useDrawer } from "../hooks/useDrawer";
+import { drawerNavigationItems } from "../../data/drawerItems";
+import { useDrawer } from "../../hooks/useDrawer";
 import { IconX } from "@tabler/icons-react";
 import SignUp from "./SignUp";
-import type { User } from "../types/user";
+import type { User } from "../../types/user";
 import { useState } from "react";
 import { IconMugFilled } from "@tabler/icons-react";
+import StoreInfo from "./StoreInfo";
 
 type DrawerProps = {
   user?: User;
@@ -15,6 +16,7 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
   const { isOpen, closeDrawer } = useDrawer();
 
   const [showSignUp, setShowSignUp] = useState(false);
+  const [showInfo, setShowInfo] = useState(false);
 
   function openSignUp() {
     closeDrawer();
@@ -28,6 +30,15 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
   function handleSignUp(user: User) {
     closeSignUp();
     onSignUp(user);
+  }
+
+  function openStoreInfo() {
+    closeDrawer();
+    setShowInfo(true);
+  }
+
+  function closeStoreInfo() {
+    setShowInfo(false);
   }
 
   return (
@@ -44,11 +55,21 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
         </div>
 
         <nav>
-          {drawerNavigationItems.map((item) => (
-            <button key={item.id} className="drawer-item">
-              {item.label}
-            </button>
-          ))}
+          {drawerNavigationItems.map((item) =>
+            item.label === "Store info" ? (
+              <button
+                key={item.id}
+                className="drawer-item"
+                onClick={openStoreInfo}
+              >
+                {item.label}
+              </button>
+            ) : (
+              <button key={item.id} className="drawer-item">
+                {item.label}
+              </button>
+            ),
+          )}
         </nav>
 
         <div className="drawer-footer">
@@ -71,6 +92,22 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
               </button>
             </div>
             <SignUp user={user} onSignUp={handleSignUp} />
+          </div>
+        </div>
+      )}
+
+      {showInfo && (
+        <div className="store-info-overlay" onClick={closeStoreInfo}>
+          <div
+            className={`store-info-modal ${showInfo ? "open" : ""}`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <div className="close-button-container">
+              <button className="close-button " onClick={closeStoreInfo}>
+                ×
+              </button>
+            </div>
+            <StoreInfo />
           </div>
         </div>
       )}

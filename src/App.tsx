@@ -1,6 +1,6 @@
 import "./App.css";
 import Navigation from "./components/Navigation";
-import Drawer from "./components/Drawer";
+import Drawer from "./components/Drawer/Drawer";
 import { DrawerProvider } from "./context/DrawerProvider";
 import { useState } from "react";
 import type { User } from "./types/user";
