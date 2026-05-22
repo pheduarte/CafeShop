@@ -4,8 +4,8 @@ import { IconX } from "@tabler/icons-react";
 import SignUp from "./SignUp";
 import type { User } from "../../types/user";
 import { useState } from "react";
-import { IconMugFilled } from "@tabler/icons-react";
 import StoreInfo from "./StoreInfo";
+
 
 type DrawerProps = {
   user?: User;
@@ -48,7 +48,7 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
       <aside className={`drawer ${isOpen ? "open" : ""}`}>
         <div className="drawer-header">
           <div className="drawer-title">
-            <IconMugFilled />
+            <img src="/images/logo.jpeg" alt="Café Shop Logo" className="drawer-logo" />
           </div>
 
           <IconX stroke={2} onClick={closeDrawer} />
@@ -56,7 +56,7 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
 
         <nav>
           {drawerNavigationItems.map((item) =>
-            item.label === "Store info" ? (
+            item.label === "Store Information" ? (
               <button
                 key={item.id}
                 className="drawer-item"
@@ -102,12 +102,7 @@ export default function Drawer({ user, onSignUp }: DrawerProps) {
             className={`store-info-modal ${showInfo ? "open" : ""}`}
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="close-button-container">
-              <button className="close-button " onClick={closeStoreInfo}>
-                ×
-              </button>
-            </div>
-            <StoreInfo />
+            <StoreInfo closeInfo={closeStoreInfo} />
           </div>
         </div>
       )}

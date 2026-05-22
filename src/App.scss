@@ -578,35 +578,48 @@
 
 .header {
   position: relative;
-  top: 0;
-  left: 0;
-  right: 0;
+
+  padding: 16px 16px 0;
+
+  display: flex;
+  flex-direction: column;
+
+  gap: 12px;
+}
+
+.header-title {
+  width: 100%;
+  min-height: 160px;
+
   display: flex;
   align-items: center;
   justify-content: center;
-  padding: 20px 16px;
-  text-align: center;
-  background: var(--header-bg);
-  border-bottom: 1px solid var(--border);
+
+  background-image: url("/images/header_bg.webp");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+
+  border-radius: 12px;
+
+  overflow: hidden;
+}
+
+h1 {
+  margin: 0;
+  font-size: 1.5rem;
   color: var(--accent);
+}
+
+.header-menu-container {
+  background: var(--accent-bg);
 
   .header-menu {
-    position: absolute;
-    left: 16px;
+    align-self: flex-start;
+
     cursor: pointer;
-  }
 
-  .header-title {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-  }
-
-  h1 {
-    margin: 0;
-    font-size: 1.5rem;
-    color: var(--accent);
+    z-index: 2;
   }
 }
 
@@ -655,6 +668,21 @@
   font-size: 1.25rem;
   font-weight: 700;
   color: var(--accent);
+
+  img {
+    width: 150px;
+    height: 150px;
+    border-radius: 6px;
+    object-fit: cover;
+  }
+
+  @media (max-width: 768px) {
+    font-size: 1.1rem;
+    img {
+      width: 90px;
+      height: 90px;
+    }
+  }
 }
 
 .drawer-item {
@@ -790,6 +818,12 @@
 }
 
 /* --- Store Info --- */
+.store-info-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .store-info-overlay {
   position: fixed;
   inset: 0;
@@ -814,7 +848,9 @@
   box-sizing: border-box;
   transform: translateY(40px) scale(0.98);
   opacity: 0;
-  transition: transform 0.3s ease, opacity 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
 }
 
 .store-info-modal.open {
@@ -839,6 +875,16 @@
   }
 }
 
+.store-info-address {
+  margin-bottom: 8px;
+  border-top: var(--border) 1px solid;
+  padding-top: 10px;
+
+  p {
+    font-size: var(--font-description);
+  }
+}
+
 .store-info-trading-hours {
   margin-bottom: 8px;
   border-top: var(--border) 1px solid;
@@ -849,6 +895,11 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 1px 10px;
     font-size: var(--font-description);
+
+    .hours-day-name {
+      font-weight: 600;
+      color: var(--text-h);
+    }
   }
 }
 

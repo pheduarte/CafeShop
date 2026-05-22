@@ -1,4 +1,4 @@
-import "./App.css";
+import "./App.scss";
 import Navigation from "./components/Navigation";
 import Drawer from "./components/Drawer/Drawer";
 import { DrawerProvider } from "./context/DrawerProvider";

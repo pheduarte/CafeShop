@@ -107,7 +107,6 @@ export function BeverageList({
           ))}
         </div>
       </section>
-      // Show beverage details in an overlay/modal when a beverage is selected
       {selectedBeverage && (
         <div className="beverage-details-overlay" onClick={closeDetails}>
           <div

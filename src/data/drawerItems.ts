@@ -2,7 +2,7 @@
 export const drawerNavigationItems = [
   {
     id: 1,
-    label: "Store info",
+    label: "Store Information",
     path: "/store",
   },
   {
