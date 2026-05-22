@@ -6,7 +6,6 @@ import OrderConfirmationCard from "./Checkout/OrderConfirmation";
 type CheckoutProps = {
   setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
   removeCartItems: React.Dispatch<React.SetStateAction<Beverage[]>>;
-  closeCard: () => void;
 };
 
 export default function Checkout({
