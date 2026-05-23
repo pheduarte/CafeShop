@@ -1,7 +1,9 @@
 import "./signIn.scss";
+import "../../ui/formUI.scss";
 import { useState } from "react";
 import type { User } from "../../types/user";
 import { signInUser } from "../../api/userApi";
+import { useAuth } from "../../hooks/useAuth";
 
 type SignInProps = {
   onSignIn: (user: User) => void;
@@ -9,6 +11,8 @@ type SignInProps = {
 };
 
 function SignIn({ onSignIn, closeSignIn }: SignInProps) {
+  const { login } = useAuth();
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -31,6 +35,7 @@ function SignIn({ onSignIn, closeSignIn }: SignInProps) {
         return;
       }
 
+      login(user);
       onSignIn(user);
       closeSignIn();
     } catch (err) {
@@ -46,38 +51,43 @@ function SignIn({ onSignIn, closeSignIn }: SignInProps) {
 
   return (
     <section className="signin-details">
-      <div className="close-button-container">
-        <button className="close-button" onClick={closeSignIn}>
-           ×
-        </button>
+      <div className="user-details-signin">
+        <div className="close-button-container">
+          <div>
+            <h2>Log In</h2>
+          </div>
+          <button className="close-button" onClick={closeSignIn}>
+            ×
+          </button>
+        </div>
+
+        {error && <div className="error-message">{error}</div>}
+        <form className="card-form" onSubmit={handleSubmit}>
+          <label> Email: </label>
+          <input
+            type="email"
+            required
+            value={formData.email}
+            onChange={(e) =>
+              setFormData({ ...formData, email: e.target.value })
+            }
+            disabled={isLoading}
+          />
+          <label> Password: </label>
+          <input
+            type="password"
+            required
+            value={formData.password}
+            onChange={(e) =>
+              setFormData({ ...formData, password: e.target.value })
+            }
+            disabled={isLoading}
+          />
+          <button type="submit" className="signin-button" disabled={isLoading}>
+            {isLoading ? "Signing in..." : "Continue"}
+          </button>
+        </form>
       </div>
-      <div>
-        <h2>Log In</h2>
-      </div>
-      {error && <div className="error-message">{error}</div>}
-      <form className="user-details-signin" onSubmit={handleSubmit}>
-        <label> Email: </label>
-        <input
-          type="email"
-          required
-          value={formData.email}
-          onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-          disabled={isLoading}
-        />
-        <label> Password: </label>
-        <input
-          type="password"
-          required
-          value={formData.password}
-          onChange={(e) =>
-            setFormData({ ...formData, password: e.target.value })
-          }
-          disabled={isLoading}
-        />
-        <button type="submit" className="signin-button" disabled={isLoading}>
-          {isLoading ? "Signing in..." : "Continue"}
-        </button>
-      </form>
     </section>
   );
 }

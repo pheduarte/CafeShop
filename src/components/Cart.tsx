@@ -1,43 +1,24 @@
 import type { Beverage } from "../types/beverages";
 import type { NavigationPages } from "./Navigation";
-import { createOrder } from "../api/orders";
-import type { Order } from "../types/orders";
 import Checkout from "./Checkout/Checkout";
 import { useState } from "react";
+import "../ui/cardOverlay.scss"
 
 function Cart({
   cartItems,
   setCartItems,
+  setCurrentPage,
 }: {
   cartItems: Beverage[];
   setCartItems: React.Dispatch<React.SetStateAction<Beverage[]>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
 }) {
-  const [orderCreated, setOrderCreated] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(false);
 
   const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
 
   function handleRemove(index: number) {
     return cartItems.filter((_, i) => i !== index);
-  }
-
-  const date: Date = new Date();
-
-  const newOrder: Order = {
-    id: "1",
-    user: "Phelippe",
-    time: date,
-    items: cartItems,
-    total: cartTotal,
-    type: "pickup",
-    tableNumber: 12,
-    status: "waiting",
-    paid: true,
-  };
-
-  function handleOrder() {
-    createOrder(newOrder);
-    setOrderCreated(true);
   }
 
   return (
@@ -71,17 +52,21 @@ function Cart({
         <button
           className="checkout-button"
           disabled={cartTotal === 0}
-          // onClick={() => setCurrentPage("checkout")}
-          onClick={handleOrder}
+          onClick={() => setCheckoutOpen(true)}
         >
           Checkout
         </button>
       </div>
 
-      {orderCreated && (
-        <div className="checkout-card-overlay">
-          <div className="checkout-card-modal open">
-            <Checkout />
+      {checkoutOpen && (
+        <div className="card-overlay">
+          <div className="card-modal open">
+            <Checkout
+              cartItems={cartItems}
+              setCartItems={setCartItems}
+              setCurrentPage={setCurrentPage}
+              closeCheckout={() => setCheckoutOpen(false)}
+            />
           </div>
         </div>
       )}

@@ -1,10 +1,15 @@
-import "./Order.scss"
+import "./Order.scss";
+import type { Order } from "../../types/orders";
+import { useAuth } from "../../hooks/useAuth";
 
 type ConfirmationProps = {
   closeCard: () => void;
+  order: Order;
 };
 
-function OrderConfirmationCard({ closeCard }: ConfirmationProps) {
+function OrderConfirmationCard({ closeCard, order }: ConfirmationProps) {
+  const { user } = useAuth();
+
   return (
     <>
       <div className="store-info-card-header">
@@ -15,8 +20,9 @@ function OrderConfirmationCard({ closeCard }: ConfirmationProps) {
       </div>
       <section>
         <header className="order-card-header">
-          <h2>Order number</h2>
-          <p>99</p>
+          <h2>{user?.name}</h2>
+          <h3>Your order number:</h3>
+          <p>{order.orderNumber}</p>
         </header>
         <div className="store-info-address">
           <div className="store-info-title">Pick up location</div>

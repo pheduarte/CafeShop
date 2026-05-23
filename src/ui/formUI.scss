@@ -1,0 +1,25 @@
+.signin-details input {
+  margin-top: 2px;
+  margin-bottom: 15px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  color: var(--text);
+  background: var(--bg);
+}
+
+.card-form {
+    display: flex;
+    flex-direction: column;
+
+    @media (min-width: 768px) {
+    max-width: 450px;
+    padding: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 500px;
+    padding: 32px;
+  }
+}

@@ -1,9 +1,7 @@
-import { useState } from "react";
-// import { getBeverages } from "../api/beverages";
+import { useState, useEffect } from "react";
+import { getBeverages } from "../api/beverages";
 import type { Beverage } from "../types/beverages";
 import BeverageCard from "../ui/BeverageCard";
-// import Header from "./Header";
-import { allBeverages } from "../api/litsOfBeverages";
 import BeverageDetails from "./BeverageDetails";
 
 export function BeverageList({
@@ -11,48 +9,42 @@ export function BeverageList({
 }: {
   setCartItems: React.Dispatch<React.SetStateAction<Beverage[]>>;
 }) {
-  /* 
-  // Uncomment the following code to fetch beverages from an API instead of using the hardcoded list. 
-  // Make sure to implement the getBeverages function in your API file and adjust the import statement accordingly.
-  //Delete allBeverages file when moving to API
-  */
-  // const [beverages, setBeverages] = useState<Beverage[]>([]);
-  // const [loading, setLoading] = useState<boolean>(true);
-  // const [error, setError] = useState("");
+  const [beverages, setBeverages] = useState<Beverage[]>([]);
+  const [loading, setLoading] = useState<boolean>(true);
+  const [error, setError] = useState("");
+  // Function to handle showing beverage details
+  const [selectedBeverage, setSelectedBeverage] = useState<Beverage | null>(
+    null,
+  );
 
-  // useEffect(() => {
-  //   async function loadBeverages() {
-  //     try {
-  //       const data = await getBeverages();
-  //       setBeverages(data);
-  //     } catch (err) {
-  //       console.error("Error fetching beverages:", err);
-  //       setError("Failed to load beverages. Please try again later.");
-  //     } finally {
-  //       setLoading(false);
-  //     }
-  //   }
+  useEffect(() => {
+    async function loadBeverages() {
+      try {
+        const data = await getBeverages();
+        setBeverages(data);
+      } catch (err) {
+        console.error("Error fetching beverages:", err);
+        setError("Failed to load beverages. Please try again later.");
+      } finally {
+        setLoading(false);
+      }
+    }
 
-  //   loadBeverages();
-  // }, []);
+    loadBeverages();
+  }, []);
 
-  // if (loading) {
-  //   return <p>Loading beverages...</p>;
-  // }
+  if (loading) {
+    return <p>Loading beverages...</p>;
+  }
 
-  // if (error) {
-  //   return <p>{error}</p>;
-  // }
+  if (error) {
+    return <p>{error}</p>;
+  }
 
   // Function to handle adding a beverage to the cart
   function addToCart(beverage: Beverage) {
     setCartItems((currentItems) => [...currentItems, beverage]);
   }
-
-  // Function to handle showing beverage details
-  const [selectedBeverage, setSelectedBeverage] = useState<Beverage | null>(
-    null,
-  );
 
   function showDetails(beverage: Beverage) {
     setSelectedBeverage(beverage);
@@ -62,16 +54,11 @@ export function BeverageList({
     setSelectedBeverage(null);
   }
 
-  // Change allBeverages to beverages when using the API fetching logic
-  const icedBeverages = allBeverages.filter(
+  const icedBeverages = beverages.filter(
     (beverage) => beverage.type === "cold",
   );
-  // Change allBeverages to beverages when using the API fetching logic
-  const hotBeverages = allBeverages.filter(
-    (beverage) => beverage.type === "hot",
-  );
-  // Change allBeverages to beverages when using the API fetching logic
-  const specialBeverages = allBeverages.filter(
+  const hotBeverages = beverages.filter((beverage) => beverage.type === "hot");
+  const specialBeverages = beverages.filter(
     (beverages) => beverages.type === "special",
   );
 

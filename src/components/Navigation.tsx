@@ -28,8 +28,10 @@ function Navigation({ navigation }: NavigationProps) {
       )}
       {currentPage === "checkout" && (
         <Checkout
+          cartItems={cartItems}
+          setCartItems={setCartItems}
           setCurrentPage={setCurrentPage}
-          removeCartItems={removeCartItems}
+          closeCheckout={removeCartItems}
         />
       )}
     </>

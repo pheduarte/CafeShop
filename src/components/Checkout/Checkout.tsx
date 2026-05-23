@@ -2,70 +2,102 @@ import type { NavigationPages } from "../Navigation";
 import { useState } from "react";
 import OrderConfirmationCard from "./OrderConfirmation";
 import "./checkout.scss";
+import type { Beverage } from "../../types/beverages";
+import type { Order } from "../../types/orders";
+import { createOrder } from "../../api/orders";
+import { useAuth } from "../../hooks/useAuth";
+import { generateOrderNumber } from "../../utilities/generateOrderNumbers";
 
 type CheckoutProps = {
-  setCurrentPage?: React.Dispatch<React.SetStateAction<NavigationPages>>;
-  removeCartItems?: () => void;
+  cartItems: Beverage[];
+  setCartItems: React.Dispatch<React.SetStateAction<Beverage[]>>;
+  setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
+  closeCheckout: () => void;
 };
 
-export default function Checkout(_props: CheckoutProps) {
-  // const handlePayment = () => {
-  //   removeCartItems([]);
-  //   setCurrentPage("home");
-  // };
+export default function Checkout({
+  cartItems,
+  setCartItems,
+  setCurrentPage,
+  closeCheckout,
+}: CheckoutProps) {
+  const { user } = useAuth();
+  const [confirmationOpen, setConfirmationOpen] = useState(false);
 
-  const [cardOpen, setCardOpen] = useState(false);
+  const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
 
-  function openCard() {
-    setCardOpen(true);
+  const newOrder: Order = {
+    id: crypto.randomUUID(),
+    orderNumber: generateOrderNumber(),
+    user: user!.name,
+    time: new Date(),
+    items: cartItems,
+    total: cartTotal,
+    type: "pickup",
+    tableNumber: 12,
+    status: "waiting",
+    paid: true,
+  };
+
+  function handlePay() {
+    createOrder(newOrder);
+    setConfirmationOpen(true);
   }
 
-  function closeCard() {
-    setCardOpen(false);
-    // removeCartItems([]);
-    // setCurrentPage("home");
+  function closeConfirmation() {
+    setConfirmationOpen(false);
+    setCartItems([]);
+    closeCheckout();
+    setCurrentPage("home");
   }
 
   return (
     <>
-      <h1>CHECKOUT</h1>
+      <div className="close-button-container">
+        <div>
+          <h2>Checkout</h2>
+        </div>
+        <button className="close-button" onClick={closeCheckout}>
+          ×
+        </button>
+      </div>
+
       <div className="checkout-form">
         <label>
           Name:
           <input type="text" name="name" />
         </label>
+
         <label>
           Card Number:
           <input type="text" name="cardNumber" />
         </label>
+
         <label>
           Expiration Date:
           <input type="text" name="expirationDate" />
         </label>
+
         <label>
           CVV:
           <input type="text" name="cvv" />
         </label>
       </div>
+
       <div className="checkout-btn-container">
-        <button
-          className="cancel-button"
-          // onClick={() => setCurrentPage("home")}
-        >
+        <button className="cancel-button" onClick={closeCheckout}>
           Cancel
         </button>
-        <button className="submit-button" onClick={openCard}>
+
+        <button className="submit-button" onClick={handlePay}>
           Pay
         </button>
       </div>
 
-      {cardOpen && (
-        <div className="order-card-overlay" onClick={closeCard}>
-          <div
-            className={`order-card-modal ${cardOpen ? "open" : ""}`}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <OrderConfirmationCard closeCard={closeCard} />
+      {confirmationOpen && (
+        <div className="order-card-overlay">
+          <div className="order-card-modal open">
+            <OrderConfirmationCard closeCard={closeConfirmation} order={newOrder}/>
           </div>
         </div>
       )}

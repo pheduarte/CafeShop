@@ -1,13 +1,15 @@
 import "./signup.scss";
+import "../../ui/cardOverlay.scss";
 import { useState } from "react";
 import type { User } from "../../types/user";
 
 type SignUpProps = {
   user?: User;
   onSignUp: (user: User) => void;
+  closeSignUp: () => void;
 };
 
-function SignUp({ user, onSignUp }: SignUpProps) {
+function SignUp({ user, onSignUp, closeSignUp }: SignUpProps) {
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -18,8 +20,13 @@ function SignUp({ user, onSignUp }: SignUpProps) {
 
   return (
     <section className="signup-details">
-      <div>
-        <h2>Create an account</h2>
+      <div className="close-button-container">
+        <div>
+          <h2>Create account</h2>
+        </div>
+        <button className="close-button" onClick={closeSignUp}>
+          ×
+        </button>
       </div>
       <form
         className="user-details-signup"

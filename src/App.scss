@@ -464,11 +464,11 @@
 }
 
 .close-button {
-  padding: 5px 10px;
+  padding: 5px 5px;
   font-size: 0.95rem;
   font-weight: 700;
   color: var(--accent);
-  background: var(--accent-bg);
+  background: var(--social-bg);
   border: 1px solid var(--accent-border);
   border-radius: 8px;
   cursor: pointer;
@@ -785,12 +785,6 @@ h1 {
   background: var(--bg);
   color: var(--text);
   resize: vertical;
-}
-
-.close-button-container {
-  display: flex;
-  justify-content: flex-end;
-  margin-top: 1rem;
 }
 
 

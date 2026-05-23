@@ -6,6 +6,8 @@ import SignIn from "./SignIn";
 import type { User } from "../../types/user";
 import { useState } from "react";
 import StoreInfo from "./StoreInfo";
+import "../../ui/cardOverlay.scss";
+import { useAuth } from "../../hooks/useAuth";
 
 type DrawerProps = {
   user?: User;
@@ -14,6 +16,8 @@ type DrawerProps = {
 };
 
 export default function Drawer({ user, onSignUp, onSignIn }: DrawerProps) {
+  const { isLoggedIn, logout } = useAuth();
+
   const { isOpen, closeDrawer } = useDrawer();
 
   const [showSignUp, setShowSignUp] = useState(false);
@@ -57,6 +61,11 @@ export default function Drawer({ user, onSignUp, onSignIn }: DrawerProps) {
     setShowInfo(false);
   }
 
+  function handleLogout() {
+    logout();
+    closeDrawer();
+  }
+
   return (
     <>
       {isOpen && <div className="overlay" onClick={closeDrawer} />}
@@ -93,35 +102,54 @@ export default function Drawer({ user, onSignUp, onSignIn }: DrawerProps) {
         </nav>
 
         <div className="drawer-footer">
-          <button className="drawer-footer-button-login" onClick={openSignIn}>
-            Log in
-          </button>
-          <button className="drawer-footer-button-signup" onClick={openSignUp}>
-            Sign up
-          </button>
+          {isLoggedIn ? (
+            <button className="drawer-footer-button-login" onClick={handleLogout}>
+              Logout
+            </button>
+          ) : (
+            <>
+              <button
+                className="drawer-footer-button-login"
+                onClick={openSignIn}
+              >
+                Log in
+              </button>
+
+              <button
+                className="drawer-footer-button-signup"
+                onClick={openSignUp}
+              >
+                Sign up
+              </button>
+            </>
+          )}
         </div>
       </aside>
 
       {showSignUp && (
-        <div className="beverage-details-overlay" onClick={closeSignUp}>
+        <div className="card-overlay" onClick={closeSignUp}>
           <div
-            className="beverage-details-modal"
+            className="card-modal open"
             onClick={(event) => event.stopPropagation()}
           >
-            <div className="close-button-container">
+            {/* <div className="close-button-container">
               <button className="close-button " onClick={closeSignUp}>
                 ×
               </button>
-            </div>
-            <SignUp user={user} onSignUp={handleSignUp} />
+            </div> */}
+            <SignUp
+              user={user}
+              onSignUp={handleSignUp}
+              closeSignUp={closeSignUp}
+            />
           </div>
         </div>
       )}
 
       {showSignIn && (
-        <div className="beverage-details-overlay" onClick={closeSignIn}>
+        <div className="card-overlay" onClick={closeSignIn}>
           <div
-            className="beverage-details-modal"
+            className="card-modal open"
             onClick={(event) => event.stopPropagation()}
           >
             <SignIn onSignIn={handleSignIn} closeSignIn={closeSignIn} />
