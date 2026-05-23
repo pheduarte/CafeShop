@@ -7,16 +7,17 @@ import type { User } from "../../types/user";
 import { useState } from "react";
 import StoreInfo from "./StoreInfo";
 import "../../ui/cardOverlay.scss";
+import "./drawer.scss";
 import { useAuth } from "../../hooks/useAuth";
 
 type DrawerProps = {
-  user?: User;
+  userName?: User;
   onSignUp: (user: User) => void;
   onSignIn: (user: User) => void;
 };
 
-export default function Drawer({ user, onSignUp, onSignIn }: DrawerProps) {
-  const { isLoggedIn, logout } = useAuth();
+export default function Drawer({ onSignUp, onSignIn, userName }: DrawerProps) {
+  const { user, isLoggedIn, logout } = useAuth();
 
   const { isOpen, closeDrawer } = useDrawer();
 
@@ -83,6 +84,14 @@ export default function Drawer({ user, onSignUp, onSignIn }: DrawerProps) {
           <IconX stroke={2} onClick={closeDrawer} />
         </div>
 
+        <div className="drawer-logged-user-title">
+          {isLoggedIn ? (
+            <h3>Welcome, {user?.name}</h3>
+          ) : (
+            <h3>Welcome, guest</h3>
+          )}
+        </div>
+
         <nav>
           {drawerNavigationItems.map((item) =>
             item.label === "Store Information" ? (
@@ -103,7 +112,10 @@ export default function Drawer({ user, onSignUp, onSignIn }: DrawerProps) {
 
         <div className="drawer-footer">
           {isLoggedIn ? (
-            <button className="drawer-footer-button-login" onClick={handleLogout}>
+            <button
+              className="drawer-footer-button-login"
+              onClick={handleLogout}
+            >
               Logout
             </button>
           ) : (
@@ -138,7 +150,7 @@ export default function Drawer({ user, onSignUp, onSignIn }: DrawerProps) {
               </button>
             </div> */}
             <SignUp
-              user={user}
+              user={userName}
               onSignUp={handleSignUp}
               closeSignUp={closeSignUp}
             />

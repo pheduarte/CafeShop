@@ -30,7 +30,7 @@ function App() {
         <Navigation navigation="home" />
       </main>
       <Drawer
-        user={currentUser}
+        userName={currentUser}
         onSignUp={handleSignUp}
         onSignIn={handleSignIn}
       />

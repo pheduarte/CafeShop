@@ -14,5 +14,10 @@ export const drawerNavigationItems = [
     id: 3,
     label: "Contact",
     path: "/contact",
+  },
+  {
+    id: 4,
+    label: "Profile",
+    path: "/profile",
   }
 ];
