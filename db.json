@@ -172,6 +172,15 @@
       "mobile": "0450666666",
       "password": "12345678",
       "role": "customer"
+    },
+    {
+      "id": "nHMfFsGndQE",
+      "name": "Phelippe",
+      "lastName": "Ambrosio",
+      "email": "pheambrosio@gmail.com",
+      "mobile": "0450635804",
+      "password": "12345678",
+      "role": "customer"
     }
   ],
   "orders": [

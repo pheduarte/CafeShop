@@ -27,7 +27,6 @@ export default function Checkout({
   const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
 
   const newOrder: Order = {
-    id: crypto.randomUUID(),
     orderNumber: generateOrderNumber(),
     user: user!.name,
     time: new Date(),

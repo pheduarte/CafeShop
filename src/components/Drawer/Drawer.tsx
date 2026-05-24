@@ -9,8 +9,6 @@ import StoreInfo from "./StoreInfo";
 import "../../ui/cardOverlay.scss";
 import "./drawer.scss";
 import { useAuth } from "../../hooks/useAuth";
-import type { Beverage } from "../../types/beverages";
-import { addDocsToFirebase } from "../../firestore/addBeverageToCatalog";
 
 import { db } from "../../firestore/firebase-config";
 import { auth } from "../../firestore/firebase-config";
@@ -31,21 +29,6 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
-
-  const beverageStock: Beverage[] = [
-  {
-    name: "Turmeric Latte",
-    description:
-      "A warm and earthy blend of turmeric, spices, and creamy milk. A golden delight.",
-    price: 5.0,
-    image: "/images/turmericlatte.webp",
-    type: "hot",
-  },
-];
-
-  function addToStock() {
-    addDocsToFirebase(beverageStock);
-  }
 
   function createUserOnFirebase(user: User) {
     createUserWithEmailAndPassword(auth, user.email, user.password)
@@ -136,8 +119,6 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
             <h3>Welcome, guest</h3>
           )}
         </div>
-
-        <button onClick={addToStock}>Add</button>
 
         <nav>
           {drawerNavigationItems.map((item) =>
