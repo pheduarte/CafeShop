@@ -9,6 +9,8 @@ import StoreInfo from "./StoreInfo";
 import "../../ui/cardOverlay.scss";
 import "./drawer.scss";
 import { useAuth } from "../../hooks/useAuth";
+import type { Beverage } from "../../types/beverages";
+import { addDocsToFirebase } from "../../firestore/addBeverageToCatalog";
 
 import { db } from "../../firestore/firebase-config";
 import { auth } from "../../firestore/firebase-config";
@@ -29,6 +31,150 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+
+  const beverageStock: Beverage[] = [
+  {
+    name: "Babyccino",
+    description:
+      "A frothy, steamed milk beverage for kids, often topped with a sprinkle of cocoa or cinnamon.",
+    price: 2.5,
+    image: "/images/babyccino.webp",
+    type: "hot",
+  },
+  {
+    name: "Cappuccino",
+    description:
+      "Fluffy steamed milk, a shot of espresso, and a dusting of cocoa. A classic Italian delight.",
+    price: 4.7,
+    image: "/images/cappuccino.webp",
+    type: "hot",
+  },
+  {
+    name: "Chai Latte",
+    description: "Warming spices and creamy goodness. Like a hug in a mug.",
+    price: 5.5,
+    image: "/images/chailatte.webp",
+    type: "hot",
+  },
+  {
+    name: "Hot Chocolate",
+    description: "Silky, rich, and deeply chocolatey. Pure comfort in a cup.",
+    price: 5.5,
+    image: "/images/hotchocolate.webp",
+    type: "hot",
+  },
+  {
+    name: "Flat White",
+    description: "Smooth, creamy, and just the right amount of coffee kick.",
+    price: 4.7,
+    image: "/images/flatwhite.webp",
+    type: "hot",
+  },
+  {
+    name: "Iced chocolate",
+    description: "Chilled, creamy, and decadently chocolatey.",
+    price: 7.0,
+    image: "/images/icedchocolate.webp",
+    type: "cold",
+  },
+  {
+    name: "Iced Latte",
+    description: "Smooth espresso, chilled milk, and a touch of sweetness.",
+    price: 7.0,
+    image: "/images/icedlatte.webp",
+    type: "cold",
+  },
+  {
+    name: "Cold Brew",
+    description: "Bold, smooth, and refreshingly cold. A coffee lover's dream.",
+    price: 8.0,
+    image: "/images/coldbrew.webp",
+    type: "special",
+  },
+  {
+    name: "Batch Brew",
+    description:
+      "A large batch of smooth, balanced coffee, brewed to perfection.",
+    price: 6.0,
+    image: "/images/batchbrew.webp",
+    type: "hot",
+  },
+  {
+    name: "Latte",
+    description: "Creamy, smooth, and perfectly balanced. A timeless classic.",
+    price: 4.5,
+    image: "/images/latte.webp",
+    type: "hot",
+  },
+  {
+    name: "Long Black",
+    description:
+      "Bold, intense, and full of flavor. A true coffee lover's choice.",
+    price: 4.0,
+    image: "/images/longblack.webp",
+    type: "hot",
+  },
+  {
+    name: "Macchiato",
+    description:
+      "Espresso with a dollop of frothy milk. A perfect balance of strong and smooth.",
+    price: 4.5,
+    image: "/images/macchiato.webp",
+    type: "hot",
+  },
+  {
+    name: "Matcha Latte",
+    description:
+      "Vibrant green tea blended with creamy milk. A refreshing and energizing treat.",
+    price: 5.0,
+    image: "/images/matchalatte.webp",
+    type: "hot",
+  },
+  {
+    name: "Mocha",
+    description:
+      "A delicious blend of espresso, chocolate, and steamed milk. A sweet indulgence.",
+    price: 5.5,
+    image: "/images/mocha.webp",
+    type: "hot",
+  },
+  {
+    name: "Piccolo",
+    description:
+      "Espresso with a small amount of steamed milk. A concentrated burst of flavor.",
+    price: 4.0,
+    image: "/images/piccolo.webp",
+    type: "hot",
+  },
+  {
+    name: "Pumpkin Spice Latte",
+    description:
+      "A seasonal favorite, blending espresso with pumpkin, spices, and creamy milk.",
+    price: 5.5,
+    image: "/images/pumpkinlatte.webp",
+    type: "hot",
+  },
+  {
+    name: "Taro Latte",
+    description:
+      "A sweet and creamy blend of taro root and milk, with a subtle nutty flavor.",
+    price: 5.0,
+    image: "/images/tarolatte.webp",
+    type: "hot",
+  },
+  {
+    name: "Turmeric Latte",
+    description:
+      "A warm and earthy blend of turmeric, spices, and creamy milk. A golden delight.",
+    price: 5.0,
+    image: "/images/turmericlatte.webp",
+    type: "hot",
+  },
+];
+
+  function addToStock() {
+    addDocsToFirebase(beverageStock);
+  }
 
   function createUserOnFirebase(user: User) {
     createUserWithEmailAndPassword(auth, user.email, user.password)
@@ -51,7 +197,6 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
         console.log(error);
       });
   }
-
 
   function openSignUp() {
     closeDrawer();
@@ -79,7 +224,7 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
 
   function handleSignIn(user: User) {
     closeSignIn();
-    onSignIn(user)
+    onSignIn(user);
   }
 
   function openStoreInfo() {
@@ -120,6 +265,8 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
             <h3>Welcome, guest</h3>
           )}
         </div>
+
+        <button onClick={addToStock}>Add</button>
 
         <nav>
           {drawerNavigationItems.map((item) =>

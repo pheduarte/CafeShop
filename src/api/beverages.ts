@@ -1,13 +1,12 @@
 import type { Beverage } from "../types/beverages";
-
-const API_URL = "http://localhost:3001/beverages";
+import { collection, getDocs } from "firebase/firestore";
+import { db } from "../firestore/firebase-config";
 
 export async function getBeverages(): Promise<Beverage[]> {
-  const response = await fetch(API_URL);
+  const snapshot = await getDocs(collection(db, "beverages"));
 
-  if (!response.ok) {
-    throw new Error("Failed to fetch beverages");
-  }
-
-  return response.json();
+  return snapshot.docs.map((doc) => ({
+    id: doc.id,
+    ...doc.data(),
+  })) as Beverage[];
 }

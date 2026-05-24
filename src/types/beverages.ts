@@ -1,5 +1,5 @@
 export type Beverage = {
-  id: number;
+  id?: string | number;
   name: string;
   description: string;
   price: number;
