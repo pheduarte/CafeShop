@@ -5,7 +5,6 @@ import Drawer from "./components/Drawer/Drawer";
 import { DrawerProvider } from "./context/DrawerProvider";
 import type { User } from "./types/user";
 import { createUser } from "./api/userApi";
-
 import { auth } from "./firestore/firebase-config";
 import { signInWithEmailAndPassword } from "firebase/auth";
 
