@@ -10,13 +10,18 @@ import "../../ui/cardOverlay.scss";
 import "./drawer.scss";
 import { useAuth } from "../../hooks/useAuth";
 
+import { db } from "../../firestore/firebase-config";
+import { auth } from "../../firestore/firebase-config";
+import { createUserWithEmailAndPassword } from "firebase/auth";
+import { doc, setDoc } from "firebase/firestore";
+
 type DrawerProps = {
   userName?: User;
   onSignUp: (user: User) => void;
   onSignIn: (user: User) => void;
 };
 
-export default function Drawer({ onSignUp, onSignIn, userName }: DrawerProps) {
+export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
   const { user, isLoggedIn, logout } = useAuth();
 
   const { isOpen, closeDrawer } = useDrawer();
@@ -24,6 +29,29 @@ export default function Drawer({ onSignUp, onSignIn, userName }: DrawerProps) {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+
+  function createUserOnFirebase(user: User) {
+    createUserWithEmailAndPassword(auth, user.email, user.password)
+      .then(async (Response) => {
+        const userid = Response.user.uid;
+        setTimeout(() => {}, 3000);
+        try {
+          await setDoc(doc(db, "users", userid), {
+            userName: user.name,
+            lastName: user.lastName,
+            email: user.email,
+            mobile: user.mobile,
+            role: user.role,
+          });
+        } catch (e) {
+          console.log("Error adding document: ", e);
+        }
+      })
+      .catch((error) => {
+        console.log(error);
+      });
+  }
+
 
   function openSignUp() {
     closeDrawer();
@@ -37,6 +65,7 @@ export default function Drawer({ onSignUp, onSignIn, userName }: DrawerProps) {
   function handleSignUp(user: User) {
     closeSignUp();
     onSignUp(user);
+    createUserOnFirebase(user);
   }
 
   function openSignIn() {
@@ -50,7 +79,7 @@ export default function Drawer({ onSignUp, onSignIn, userName }: DrawerProps) {
 
   function handleSignIn(user: User) {
     closeSignIn();
-    onSignIn(user);
+    onSignIn(user)
   }
 
   function openStoreInfo() {

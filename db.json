@@ -163,6 +163,15 @@
       "mobile": "297421094107`",
       "password": "1234",
       "role": "customer"
+    },
+    {
+      "id": "bPGoTcbrLp8",
+      "name": "Manuela",
+      "lastName": "Metz",
+      "email": "manuela@test.com",
+      "mobile": "0450666666",
+      "password": "12345678",
+      "role": "customer"
     }
   ],
   "orders": [
