@@ -9,6 +9,8 @@ import StoreInfo from "./StoreInfo";
 import "../../ui/cardOverlay.scss";
 import "./drawer.scss";
 import { useAuth } from "../../hooks/useAuth";
+import AdminPanel from "../../Admin/Components/AdminPanel";
+import "../../Admin/Components/AdminPanel.scss";
 
 import { db } from "../../firestore/firebase-config";
 import { auth } from "../../firestore/firebase-config";
@@ -29,6 +31,7 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
   const [showSignUp, setShowSignUp] = useState(false);
   const [showSignIn, setShowSignIn] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
+  const [showAdminPanel, setShowAdminPanel] = useState(false);
 
   function createUserOnFirebase(user: User) {
     createUserWithEmailAndPassword(auth, user.email, user.password)
@@ -95,6 +98,15 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
     closeDrawer();
   }
 
+  function openAdminPanel() {
+    closeDrawer();
+    setShowAdminPanel(true);
+  }
+
+  function closeAdminPanel() {
+    setShowAdminPanel(false);
+  }
+
   return (
     <>
       {isOpen && <div className="overlay" onClick={closeDrawer} />}
@@ -127,6 +139,14 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
                 key={item.id}
                 className="drawer-item"
                 onClick={openStoreInfo}
+              >
+                {item.label}
+              </button>
+            ) : item.label === "Admin Panel" ? (
+              <button
+                key={item.id}
+                className="drawer-item"
+                onClick={openAdminPanel}
               >
                 {item.label}
               </button>
@@ -172,11 +192,6 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
             className="card-modal open"
             onClick={(event) => event.stopPropagation()}
           >
-            {/* <div className="close-button-container">
-              <button className="close-button " onClick={closeSignUp}>
-                ×
-              </button>
-            </div> */}
             <SignUp
               user={userName}
               onSignUp={handleSignUp}
@@ -204,6 +219,14 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
             onClick={(event) => event.stopPropagation()}
           >
             <StoreInfo closeInfo={closeStoreInfo} />
+          </div>
+        </div>
+      )}
+
+      {showAdminPanel && (
+        <div className="admin-overlay" onClick={closeAdminPanel}>
+          <div className={`admin-modal ${showAdminPanel ? "open" : ""}`}>
+            <AdminPanel closeAdminPanel={closeAdminPanel} />
           </div>
         </div>
       )}
