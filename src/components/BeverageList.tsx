@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import { getBeverages } from "../api/beverages";
 import type { Beverage } from "../types/beverages";
-import BeverageCard from "../ui/BeverageCard";
+import BeverageCard from "../global/ui/BeverageCard";
 import BeverageDetails from "./BeverageDetails";
 
 export function BeverageList({
