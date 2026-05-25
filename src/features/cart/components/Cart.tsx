@@ -2,7 +2,7 @@ import type { Beverage } from "../../../types/beverages";
 import type { NavigationPages } from "../../../components/Navigation";
 import Checkout from "../../checkout/components/Checkout";
 import { useState } from "react";
-import "../../../ui/cardOverlay.scss";
+import "../../../global/ui/cardOverlay.scss";
 
 function Cart({
   cartItems,

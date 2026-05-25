@@ -1,5 +1,5 @@
 import "./signIn.scss";
-import "../../../ui/formUI.scss";
+import "../../../global/ui/formUI.scss";
 import { useState } from "react";
 import type { User } from "../../../types/user";
 import { useAuth } from "../../../hooks/useAuth";

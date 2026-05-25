@@ -1,5 +1,5 @@
 import "./signup.scss";
-import "../../../ui/cardOverlay.scss";
+import "../../../global/ui/cardOverlay.scss";
 import { useState } from "react";
 import type { User } from "../../../types/user";
 

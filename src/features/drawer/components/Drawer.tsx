@@ -6,7 +6,7 @@ import SignIn from "../../auth/components/SignIn";
 import type { User } from "../../../types/user";
 import { useState } from "react";
 import StoreInfo from "../../../components/Drawer/StoreInfo";
-import "../../../ui/cardOverlay.scss";
+import "../../../global/ui/cardOverlay.scss";
 import "./drawer.scss";
 import { useAuth } from "../../../hooks/useAuth";
 import AdminPanel from "../../Admin/Components/AdminPanel";
