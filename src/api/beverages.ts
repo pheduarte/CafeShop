@@ -1,6 +1,6 @@
 import type { Beverage } from "../types/beverages";
 import { collection, getDocs } from "firebase/firestore";
-import { db } from "../firestore/firebase-config";
+import { db } from "../config/firebase-config";
 
 export async function getBeverages(): Promise<Beverage[]> {
   const snapshot = await getDocs(collection(db, "beverages"));

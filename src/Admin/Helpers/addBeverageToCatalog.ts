@@ -1,4 +1,4 @@
-import { db } from "../../firestore/firebase-config";
+import { db } from "../../config/firebase-config";
 import { collection, addDoc } from "firebase/firestore";
 import type { Beverage } from "../../types/beverages";
 

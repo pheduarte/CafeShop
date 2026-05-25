@@ -1,4 +1,4 @@
-import { db } from "../firestore/firebase-config";
+import { db } from "../config/firebase-config";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
 import type { Order } from "../types/orders";
 
