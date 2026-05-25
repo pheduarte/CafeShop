@@ -4,32 +4,19 @@ import Navigation from "./components/Navigation";
 import Drawer from "./components/Drawer/Drawer";
 import { DrawerProvider } from "./context/DrawerProvider";
 import type { User } from "./types/user";
-import { createUser } from "./api/userApi";
-import { auth } from "./firestore/firebase-config";
-import { signInWithEmailAndPassword } from "firebase/auth";
+import { signUpUserWithFirebase } from "./firestore/signUpUserWithFirebase";
 
 function App() {
   const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
 
-  async function loginWithFirebase(user: User) {
-    const userCredential = await signInWithEmailAndPassword(
-      auth,
-      user.email,
-      user.password,
-    );
-    
-    return userCredential.user;
-  }
-
   function handleSignIn(user: User) {
     setCurrentUser(user);
-    loginWithFirebase(user);
     alert(`Welcome back, ${user.name}!`);
   }
 
-  async function handleSignUp(newUser: User) {
+  async function handleSignUp(newUser: User, password: string) {
     try {
-      await createUser(newUser);
+      await signUpUserWithFirebase(newUser, password);
       alert("Account created successfully!");
     } catch (error) {
       alert("Somenthing went wrong!");

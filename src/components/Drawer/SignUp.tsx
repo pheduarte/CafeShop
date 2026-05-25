@@ -3,15 +3,13 @@ import "../../ui/cardOverlay.scss";
 import { useState } from "react";
 import type { User } from "../../types/user";
 
-
 type SignUpProps = {
   user?: User;
-  onSignUp: (user: User) => void;
+  onSignUp: (user: User, password: string) => void;
   closeSignUp: () => void;
 };
 
-
-function SignUp({ user, onSignUp, closeSignUp }: SignUpProps) {
+function SignUp({ onSignUp, closeSignUp }: SignUpProps) {
   const [formData, setFormData] = useState({
     name: "",
     lastName: "",
@@ -36,15 +34,14 @@ function SignUp({ user, onSignUp, closeSignUp }: SignUpProps) {
           e.preventDefault();
 
           const newUser: User = {
-            id: user?.id ?? crypto.randomUUID(),
+            id: "",
             name: formData.name,
             lastName: formData.lastName,
             email: formData.email,
             mobile: formData.mobile,
-            password: formData.password,
-            role: "customer",
+            role: "customer" as const,
           };
-          {onSignUp(newUser)};
+          onSignUp(newUser, formData.password);
         }}
       >
         <label> Email: </label>

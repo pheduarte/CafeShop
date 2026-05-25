@@ -38,3 +38,33 @@
   transform: translateY(0) scale(1);
   opacity: 1;
 }
+
+.admin-function-list {
+display: flex;
+flex-direction: column;
+margin-top: 1rem;
+}
+
+.admin-function-items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: var(--border) 1px solid;
+  padding: 1rem;
+
+  font-size: 0.875rem;
+  font-weight: 700;
+
+  button {
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+  }
+}
+
+.admin-function-items:hover {
+    cursor: pointer;
+    filter: brightness(1.2);
+  }

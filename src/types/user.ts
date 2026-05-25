@@ -4,6 +4,5 @@ export type User = {
     name: string,
     lastName: string,
     mobile: string,
-    password: string,
     role: 'customer' | 'admin' | 'barista',
 }

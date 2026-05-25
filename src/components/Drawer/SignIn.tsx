@@ -2,11 +2,11 @@ import "./signIn.scss";
 import "../../ui/formUI.scss";
 import { useState } from "react";
 import type { User } from "../../types/user";
-import { signInUser } from "../../api/userApi";
 import { useAuth } from "../../hooks/useAuth";
+import { signInUserWithFirebase } from "../../firestore/signInUserWithFirebase"
 
 type SignInProps = {
-  onSignIn: (user: User) => void;
+  onSignIn: (user: User, password: string) => void;
   closeSignIn: () => void;
 };
 
@@ -27,7 +27,7 @@ function SignIn({ onSignIn, closeSignIn }: SignInProps) {
     setIsLoading(true);
 
     try {
-      const user = await signInUser(formData.email, formData.password);
+      const user = await signInUserWithFirebase(formData.email, formData.password);
 
       if (!user) {
         setError("Invalid email or password.");
@@ -36,7 +36,7 @@ function SignIn({ onSignIn, closeSignIn }: SignInProps) {
       }
 
       login(user);
-      onSignIn(user);
+      onSignIn(user, formData.password);
       closeSignIn();
     } catch (err) {
       const errorMessage =

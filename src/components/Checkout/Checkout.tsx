@@ -4,7 +4,7 @@ import OrderConfirmationCard from "./OrderConfirmation";
 import "./checkout.scss";
 import type { Beverage } from "../../types/beverages";
 import type { Order } from "../../types/orders";
-import { createOrder } from "../../api/orders";
+import { addNewOrder } from "../../firestore/createOrder";
 import { useAuth } from "../../hooks/useAuth";
 import { generateOrderNumber } from "../../utilities/generateOrderNumbers";
 
@@ -23,24 +23,42 @@ export default function Checkout({
 }: CheckoutProps) {
   const { user } = useAuth();
   const [confirmationOpen, setConfirmationOpen] = useState(false);
+  const [savedOrder, setSavedOrder] = useState<Order | null>(null);
 
   const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
 
-  const newOrder: Order = {
-    orderNumber: generateOrderNumber(),
-    user: user!.name,
-    time: new Date(),
-    items: cartItems,
-    total: cartTotal,
-    type: "pickup",
-    tableNumber: 12,
-    status: "waiting",
-    paid: true,
-  };
+  async function handlePay() {
+    if (!user) {
+      alert("Please sign in before placing an order.");
+      return;
+    }
 
-  function handlePay() {
-    createOrder(newOrder);
-    setConfirmationOpen(true);
+    const newOrder: Order = {
+      orderNumber: generateOrderNumber(),
+      userId: user.id,
+      customerName: user.name,
+      items: cartItems,
+      total: cartTotal,
+      type: "pickup",
+      tableNumber: 12,
+      status: "waiting",
+      paid: true,
+      specialInstructions: "",
+    };
+
+    try {
+      const orderId = await addNewOrder(newOrder);
+
+      setSavedOrder({
+        ...newOrder,
+        id: orderId,
+      });
+
+      setConfirmationOpen(true);
+    } catch (error) {
+      console.error(error);
+      alert("Could not place order. Please try again.");
+    }
   }
 
   function closeConfirmation() {
@@ -96,7 +114,10 @@ export default function Checkout({
       {confirmationOpen && (
         <div className="order-card-overlay">
           <div className="order-card-modal open">
-            <OrderConfirmationCard closeCard={closeConfirmation} order={newOrder}/>
+            <OrderConfirmationCard
+              closeCard={closeConfirmation}
+              order={savedOrder!}
+            />
           </div>
         </div>
       )}

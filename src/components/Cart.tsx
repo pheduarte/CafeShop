@@ -21,6 +21,7 @@ function Cart({
     return cartItems.filter((_, i) => i !== index);
   }
 
+
   return (
     <div>
       {cartItems.length === 0 ? (

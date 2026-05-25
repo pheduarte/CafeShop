@@ -12,15 +12,10 @@ import { useAuth } from "../../hooks/useAuth";
 import AdminPanel from "../../Admin/Components/AdminPanel";
 import "../../Admin/Components/AdminPanel.scss";
 
-import { db } from "../../firestore/firebase-config";
-import { auth } from "../../firestore/firebase-config";
-import { createUserWithEmailAndPassword } from "firebase/auth";
-import { doc, setDoc } from "firebase/firestore";
-
 type DrawerProps = {
   userName?: User;
-  onSignUp: (user: User) => void;
-  onSignIn: (user: User) => void;
+  onSignUp: (user: User, password: string) => void;
+  onSignIn: (user: User , password: string) => void;
 };
 
 export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
@@ -33,28 +28,6 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
   const [showInfo, setShowInfo] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
 
-  function createUserOnFirebase(user: User) {
-    createUserWithEmailAndPassword(auth, user.email, user.password)
-      .then(async (Response) => {
-        const userid = Response.user.uid;
-        setTimeout(() => {}, 3000);
-        try {
-          await setDoc(doc(db, "users", userid), {
-            userName: user.name,
-            lastName: user.lastName,
-            email: user.email,
-            mobile: user.mobile,
-            role: user.role,
-          });
-        } catch (e) {
-          console.log("Error adding document: ", e);
-        }
-      })
-      .catch((error) => {
-        console.log(error);
-      });
-  }
-
   function openSignUp() {
     closeDrawer();
     setShowSignUp(true);
@@ -64,10 +37,9 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
     setShowSignUp(false);
   }
 
-  function handleSignUp(user: User) {
+  function handleSignUp(user: User, password: string) {
     closeSignUp();
-    onSignUp(user);
-    createUserOnFirebase(user);
+    onSignUp(user, password);
   }
 
   function openSignIn() {
@@ -79,9 +51,9 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
     setShowSignIn(false);
   }
 
-  function handleSignIn(user: User) {
+  function handleSignIn(user: User, password: string) {
     closeSignIn();
-    onSignIn(user);
+    onSignIn(user, password);
   }
 
   function openStoreInfo() {
@@ -133,29 +105,45 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
         </div>
 
         <nav>
-          {drawerNavigationItems.map((item) =>
-            item.label === "Store Information" ? (
-              <button
-                key={item.id}
-                className="drawer-item"
-                onClick={openStoreInfo}
-              >
-                {item.label}
-              </button>
-            ) : item.label === "Admin Panel" ? (
-              <button
-                key={item.id}
-                className="drawer-item"
-                onClick={openAdminPanel}
-              >
-                {item.label}
-              </button>
-            ) : (
+          {drawerNavigationItems.map((item) => {
+            // Hide Admin Panel for non-admin users
+            if (item.label === "Admin Panel" && user?.role !== "admin") {
+              return null;
+            }
+
+            // Admin Panel button
+            if (item.label === "Admin Panel") {
+              return (
+                <button
+                  key={item.id}
+                  className="drawer-item"
+                  onClick={openAdminPanel}
+                >
+                  {item.label}
+                </button>
+              );
+            }
+
+            // Store Information button
+            if (item.label === "Store Information") {
+              return (
+                <button
+                  key={item.id}
+                  className="drawer-item"
+                  onClick={openStoreInfo}
+                >
+                  {item.label}
+                </button>
+              );
+            }
+
+            // Default buttons
+            return (
               <button key={item.id} className="drawer-item">
                 {item.label}
               </button>
-            ),
-          )}
+            );
+          })}
         </nav>
 
         <div className="drawer-footer">

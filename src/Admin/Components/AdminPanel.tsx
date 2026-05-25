@@ -1,10 +1,19 @@
 import "./AdminPanel.scss";
+import { IconMathGreater } from "@tabler/icons-react";
+import { addToStock } from "../Helpers/addBeverageToStock";
+import type { Beverage } from "../../types/beverages";
+import { allBeverages } from "../../api/litsOfBeverages";
 
 type AdminPanelProps = {
   closeAdminPanel: () => void;
 };
 
 function AdminPanel({ closeAdminPanel }: AdminPanelProps) {
+
+  function addBebida(list: Beverage[]) {
+    addToStock(list);
+  }
+
   return (
     <>
       <div className="admin-card-header">
@@ -13,9 +22,26 @@ function AdminPanel({ closeAdminPanel }: AdminPanelProps) {
           ×
         </button>
       </div>
-      <div>
-        <label>Add beverage to catalog</label>
-        <button>Add</button>
+      <div className="admin-function-list">
+        <div className="admin-function-items">
+          <p>Add beverage to catalog</p>
+
+          <button>
+            <IconMathGreater stroke={2} />
+          </button>
+        </div>
+        <div className="admin-function-items">
+          <p>Manage Users</p>
+          <button>
+            <IconMathGreater stroke={2} />
+          </button>
+        </div>
+        <div className="admin-function-items">
+          <p>Add Bebida</p>
+          <button onClick={() => addBebida(allBeverages)}>
+            <IconMathGreater stroke={2} />
+          </button>
+        </div>
       </div>
     </>
   );
