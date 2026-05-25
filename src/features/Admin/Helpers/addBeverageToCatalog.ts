@@ -1,6 +1,6 @@
-import { db } from "../../config/firebase-config";
+import { db } from "../../../config/firebase-config";
 import { collection, addDoc } from "firebase/firestore";
-import type { Beverage } from "../../types/beverages";
+import type { Beverage } from "../../../types/beverages";
 
 export async function addDocsToFirebase(beverages: Beverage[]) {
   for (const beverage of beverages) {

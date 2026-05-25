@@ -1,21 +1,21 @@
-import { drawerNavigationItems } from "../../data/drawerItems";
-import { useDrawer } from "../../hooks/useDrawer";
+import { drawerNavigationItems } from "../../../data/drawerItems";
+import { useDrawer } from "../../../hooks/useDrawer";
 import { IconX } from "@tabler/icons-react";
-import SignUp from "./SignUp";
-import SignIn from "./SignIn";
-import type { User } from "../../types/user";
+import SignUp from "../../auth/components/SignUp";
+import SignIn from "../../auth/components/SignIn";
+import type { User } from "../../../types/user";
 import { useState } from "react";
-import StoreInfo from "./StoreInfo";
-import "../../ui/cardOverlay.scss";
+import StoreInfo from "../../../components/Drawer/StoreInfo";
+import "../../../ui/cardOverlay.scss";
 import "./drawer.scss";
-import { useAuth } from "../../hooks/useAuth";
+import { useAuth } from "../../../hooks/useAuth";
 import AdminPanel from "../../Admin/Components/AdminPanel";
 import "../../Admin/Components/AdminPanel.scss";
 
 type DrawerProps = {
   userName?: User;
   onSignUp: (user: User, password: string) => void;
-  onSignIn: (user: User , password: string) => void;
+  onSignIn: (user: User, password: string) => void;
 };
 
 export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {

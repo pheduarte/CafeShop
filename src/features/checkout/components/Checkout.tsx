@@ -1,12 +1,12 @@
-import type { NavigationPages } from "../Navigation";
+import type { NavigationPages } from "../../../components/Navigation";
 import { useState } from "react";
 import OrderConfirmationCard from "./OrderConfirmation";
 import "./checkout.scss";
-import type { Beverage } from "../../types/beverages";
-import type { Order } from "../../types/orders";
-import { addNewOrder } from "../../firestore/createOrder";
-import { useAuth } from "../../hooks/useAuth";
-import { generateOrderNumber } from "../../utilities/generateOrderNumbers";
+import type { Beverage } from "../../../types/beverages";
+import type { Order } from "../../../types/orders";
+import { addNewOrder } from "../services/createOrder";
+import { useAuth } from "../../../hooks/useAuth";
+import { generateOrderNumber } from "../services/generateOrderNumbers";
 
 type CheckoutProps = {
   cartItems: Beverage[];

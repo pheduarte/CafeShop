@@ -1,5 +1,5 @@
 import Home from "./Home";
-import Checkout from "./Checkout/Checkout";
+import Checkout from "../features/checkout/components/Checkout";
 import { useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import type { Beverage } from "../types/beverages";

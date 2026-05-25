@@ -2,7 +2,7 @@ import { useState } from "react";
 import type { NavigationPages } from "./Navigation";
 import { BeverageList } from "./BeverageList";
 import CartBar from "./CartBar";
-import Cart from "./Cart";
+import Cart from "../features/cart/components/Cart";
 import type { Beverage } from "../types/beverages";
 import Header from "./Header";
 

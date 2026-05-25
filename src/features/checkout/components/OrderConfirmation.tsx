@@ -1,6 +1,6 @@
 import "./Order.scss";
-import type { Order } from "../../types/orders";
-import { useAuth } from "../../hooks/useAuth";
+import type { Order } from "../../../types/orders";
+import { useAuth } from "../../../hooks/useAuth";
 
 type ConfirmationProps = {
   closeCard: () => void;

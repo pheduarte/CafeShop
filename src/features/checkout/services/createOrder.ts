@@ -1,10 +1,8 @@
-import { db } from "../config/firebase-config";
+import { db } from "../../../config/firebase-config";
 import { collection, addDoc, serverTimestamp } from "firebase/firestore";
-import type { Order } from "../types/orders";
+import type { Order } from "../../../types/orders";
 
-export async function addNewOrder(
-  order: Order,
-) {
+export async function addNewOrder(order: Order) {
   const docRef = await addDoc(collection(db, "orders"), {
     ...order,
     time: serverTimestamp(),

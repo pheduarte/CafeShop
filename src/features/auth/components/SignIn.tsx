@@ -1,9 +1,9 @@
 import "./signIn.scss";
-import "../../ui/formUI.scss";
+import "../../../ui/formUI.scss";
 import { useState } from "react";
-import type { User } from "../../types/user";
-import { useAuth } from "../../hooks/useAuth";
-import { signInUserWithFirebase } from "../../firestore/signInUserWithFirebase"
+import type { User } from "../../../types/user";
+import { useAuth } from "../../../hooks/useAuth";
+import { signInUser } from "../services/signInUser";
 
 type SignInProps = {
   onSignIn: (user: User, password: string) => void;
@@ -27,7 +27,7 @@ function SignIn({ onSignIn, closeSignIn }: SignInProps) {
     setIsLoading(true);
 
     try {
-      const user = await signInUserWithFirebase(formData.email, formData.password);
+      const user = await signInUser(formData.email, formData.password);
 
       if (!user) {
         setError("Invalid email or password.");

@@ -1,8 +1,8 @@
-import type { Beverage } from "../types/beverages";
-import type { NavigationPages } from "./Navigation";
-import Checkout from "./Checkout/Checkout";
+import type { Beverage } from "../../../types/beverages";
+import type { NavigationPages } from "../../../components/Navigation";
+import Checkout from "../../checkout/components/Checkout";
 import { useState } from "react";
-import "../ui/cardOverlay.scss"
+import "../../../ui/cardOverlay.scss";
 
 function Cart({
   cartItems,
@@ -20,7 +20,6 @@ function Cart({
   function handleRemove(index: number) {
     return cartItems.filter((_, i) => i !== index);
   }
-
 
   return (
     <div>
