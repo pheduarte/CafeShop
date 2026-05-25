@@ -213,7 +213,10 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
 
       {showAdminPanel && (
         <div className="admin-overlay" onClick={closeAdminPanel}>
-          <div className={`admin-modal ${showAdminPanel ? "open" : ""}`}>
+          <div
+            className={`admin-modal ${showAdminPanel ? "open" : ""}`}
+            onClick={(event) => event.stopPropagation()}
+          >
             <AdminPanel closeAdminPanel={closeAdminPanel} />
           </div>
         </div>

@@ -31,10 +31,10 @@ export function BeverageList({
     }
 
     loadBeverages();
-  }, []);
+  }, [beverages]);
 
   if (loading) {
-    return <p>Loading beverages...</p>;
+    return <p>Loading beverages...</p>
   }
 
   if (error) {
