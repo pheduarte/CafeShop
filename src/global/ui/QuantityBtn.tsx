@@ -1,17 +1,29 @@
-import "./QuantityBtn.scss"
-import { useState } from "react";
+import type React from "react";
+import "./QuantityBtn.scss";
 
-function QuantityBtn() {
+type QuantityProps = {
+  itemQuantity: number;
+  setItemQuantity: React.Dispatch<React.SetStateAction<number>>;
+};
 
-    const [quantity, setQuantity] = useState<number>(1);
+export function QuantityBtn({ itemQuantity, setItemQuantity }: QuantityProps) {
+  return (
+    <div className="quantity-container">
+      <button
+        className="subtract-btn"
+        disabled={itemQuantity === 1}
+        onClick={() => setItemQuantity(itemQuantity - 1)}
+      >
+        -
+      </button>
 
-    return (
-        <div className="quantity-container">
-            <button className="add-btn" onClick={() => setQuantity(quantity + 1)}></button>
-            <span className="quantity">{quantity}</span>
-            <button className="subtract-btn" disabled={quantity === 1} onClick={() => setQuantity(quantity - 1)}></button>
-        </div>
-    )
+      <span className="quantity">{itemQuantity}</span>
+      <button
+        className="add-btn"
+        onClick={() => setItemQuantity(itemQuantity + 1)}
+      >
+        +
+      </button>
+    </div>
+  );
 }
-
-export default QuantityBtn;

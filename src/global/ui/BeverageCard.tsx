@@ -2,7 +2,6 @@ import type { Beverage } from "../../types/beverages";
 
 type BeverageCardProps = {
   beverage: Beverage;
-  // onAddToCart: (beverage: Beverage) => void;
   onShowDetails?: (beverage: Beverage) => void;
 };
 
