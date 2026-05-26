@@ -1,4 +1,6 @@
 import type { Beverage } from "../types/beverages";
+import { QuantityBtn } from "../global/ui/QuantityBtn";
+import { useState } from "react";
 
 type BeverageDetailsProps = {
   beverage: Beverage;
@@ -6,7 +8,13 @@ type BeverageDetailsProps = {
   closeDetails: () => void;
 };
 
-function BeverageDetails({ beverage, onAddToCart, closeDetails }: BeverageDetailsProps) {
+function BeverageDetails({
+  beverage,
+  onAddToCart,
+  closeDetails,
+}: BeverageDetailsProps) {
+  const [quantity, setQuantity] = useState(1);
+
   return (
     <section className="beverage-details">
       <div>
@@ -29,6 +37,7 @@ function BeverageDetails({ beverage, onAddToCart, closeDetails }: BeverageDetail
       >
         <label> Special Instructions: </label>
         <textarea placeholder="e.g., no ice, extra hot, etc." />
+        <QuantityBtn itemQuantity={quantity} setItemQuantity={setQuantity} />
         <button type="submit" className="add-to-cart-button">
           Add to Order
         </button>

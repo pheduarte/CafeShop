@@ -4,7 +4,7 @@ import { useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
 import type { Beverage } from "../types/beverages";
 
-export type NavigationPages = "home" | "checkout";
+export type NavigationPages = "home" | "checkout" | "cart";
 
 type NavigationProps = {
   navigation: NavigationPages;
