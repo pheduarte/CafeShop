@@ -1,9 +1,9 @@
 import "./QuantityBtn.scss"
 import { useState } from "react";
 
-function QuantityBtn({ initialQuantity }: { initialQuantity?: number }) {
+function QuantityBtn() {
 
-    const [quantity, setQuantity] = useState<number>(initialQuantity);
+    const [quantity, setQuantity] = useState<number>(1);
 
     return (
         <div className="quantity-container">
