@@ -319,58 +319,6 @@
   }
 }
 
-.cart-bar {
-  position: fixed;
-  right: 16px;
-  bottom: calc(env(safe-area-inset-bottom) + 12px);
-  left: 16px;
-  z-index: 10;
-  display: flex;
-  flex-direction: row;
-  align-items: center;
-  justify-content: space-between;
-  gap: 14px;
-  max-width: 884px;
-  margin: 30px auto;
-  padding: 12px;
-  color: var(--text-h);
-  background: rgba(255, 255, 255, 0.94);
-  border: 1px solid var(--border);
-  border-radius: 8px;
-  box-shadow: var(--shadow);
-  backdrop-filter: blur(12px);
-  box-sizing: border-box;
-}
-
-.cart-bar-icon {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex: 0 0 44px;
-  width: 44px;
-  height: 44px;
-  color: var(--accent);
-  background: var(--accent-bg);
-  border: 1px solid var(--accent-border);
-  border-radius: 8px;
-}
-
-.cart-bar-copy {
-  min-width: 0;
-}
-
-.cart-bar h2 {
-  margin: 0 0 2px;
-  font-size: 1rem;
-  line-height: 1.2;
-}
-
-.cart-bar p {
-  margin: 0;
-  color: var(--text);
-  font-size: 0.9rem;
-  line-height: 1.35;
-}
 
 .cart-list {
   margin: 16px;

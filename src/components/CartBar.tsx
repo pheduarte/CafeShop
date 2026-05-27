@@ -1,9 +1,12 @@
 import { IconShoppingCart } from "@tabler/icons-react";
 import type { cartItems } from "./Navigation";
+import "./CartBar.scss"
 
 function CartBar({ cartItems }: { cartItems: cartItems[] }) {
   const groupedItems = cartItems.reduce((acc, item) => {
-    const existingItem = acc.find((cartItem) => cartItem.beverage.name === item.beverage.name);
+    const existingItem = acc.find(
+      (cartItem) => cartItem.beverage.name === item.beverage.name,
+    );
 
     if (existingItem) {
       existingItem.quantity += item.quantity;
@@ -21,17 +24,19 @@ function CartBar({ cartItems }: { cartItems: cartItems[] }) {
     0,
   );
 
+  const total = groupedItems.reduce(
+    (balance, item) => balance + item.beverage.price * item.quantity,
+    0,
+  );
+
   return (
     <div className="cart-bar">
       <div className="cart-bar-copy">
         <h2>Cart</h2>
         {cartItems.length > 0 ? (
           <p>
-            {/* {cartItems.length} item(s) in your cart. - Total: $
-            {cartItems
-              .reduce((total, item) => total + item.beverage.price, 0)
-              .toFixed(2)} */}
-              {totalBeverages}
+            {totalBeverages} item(s) in your cart - Total: $
+            {total.toFixed(2)}
           </p>
         ) : (
           <p>Your cart is empty.</p>
