@@ -11,6 +11,8 @@ import "./drawer.scss";
 import { useAuth } from "../../../hooks/useAuth";
 import AdminPanel from "../../Admin/Components/AdminPanel";
 import "../../Admin/Components/AdminPanel.scss";
+import "../../Barista/components/Barista.scss";
+import Barista from "../../Barista/components/Barista";
 
 type DrawerProps = {
   userName?: User;
@@ -27,6 +29,7 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
   const [showSignIn, setShowSignIn] = useState(false);
   const [showInfo, setShowInfo] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
+  const [showBaristaPanel, setShowBaristaPanel] = useState(false);
 
   function openSignUp() {
     closeDrawer();
@@ -77,6 +80,15 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
 
   function closeAdminPanel() {
     setShowAdminPanel(false);
+  }
+
+  function openBaristaPanel() {
+    closeDrawer();
+    setShowBaristaPanel(true);
+  }
+
+  function closeBaristaPanel() {
+    setShowBaristaPanel(false);
   }
 
   return (
@@ -131,6 +143,18 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
                   key={item.id}
                   className="drawer-item"
                   onClick={openStoreInfo}
+                >
+                  {item.label}
+                </button>
+              );
+            }
+
+            if (item.label === "Barista Panel") {
+              return (
+                <button
+                  key={item.id}
+                  className="drawer-item"
+                  onClick={openBaristaPanel}
                 >
                   {item.label}
                 </button>
@@ -218,6 +242,17 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
             onClick={(event) => event.stopPropagation()}
           >
             <AdminPanel closeAdminPanel={closeAdminPanel} />
+          </div>
+        </div>
+      )}
+
+      {showBaristaPanel && (
+        <div className="barista-overlay" onClick={closeBaristaPanel}>
+          <div
+            className={`barista-modal ${showBaristaPanel ? "open" : ""}`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <Barista closeBaristaPanel={closeBaristaPanel} />
           </div>
         </div>
       )}

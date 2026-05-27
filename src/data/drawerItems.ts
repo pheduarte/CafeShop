@@ -24,5 +24,10 @@ export const drawerNavigationItems = [
     id: 5,
     label: "Admin Panel",
     path: "/admin"
+  },
+  {
+    id: 6,
+    label: "Barista Panel",
+    path: "/admin"
   }
 ];

@@ -61,6 +61,7 @@ export default function Checkout({
     }
   }
 
+  // 
   function closeConfirmation() {
     setConfirmationOpen(false);
     setCartItems([]);
