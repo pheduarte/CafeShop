@@ -13,14 +13,17 @@
   "dependencies": {
     "@tabler/icons-react": "^3.44.0",
     "firebase": "^12.13.0",
+    "google-libphonenumber": "^3.2.44",
     "json-server": "^1.0.0-beta.15",
     "lucide-react": "^1.16.0",
     "react": "^19.2.6",
     "react-dom": "^19.2.6",
+    "react-international-phone": "^4.8.0",
     "sass": "^1.100.0"
   },
   "devDependencies": {
     "@eslint/js": "^10.0.1",
+    "@types/google-libphonenumber": "^7.4.30",
     "@types/node": "^24.12.3",
     "@types/react": "^19.2.14",
     "@types/react-dom": "^19.2.3",

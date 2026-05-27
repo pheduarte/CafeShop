@@ -123,6 +123,14 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
               return null;
             }
 
+            if (
+              item.label === "Barista Panel" &&
+              user?.role !== "admin" &&
+              user?.role !== "barista"
+            ) {
+              return null;
+            }
+
             // Admin Panel button
             if (item.label === "Admin Panel") {
               return (
