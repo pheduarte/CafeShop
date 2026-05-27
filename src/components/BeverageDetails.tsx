@@ -1,12 +1,22 @@
+import { QuantityBtn } from "../global/ui/QuantityBtn";
+import React from "react";
 import type { Beverage } from "../types/beverages";
 
 type BeverageDetailsProps = {
   beverage: Beverage;
+  quantity: number;
+  setItemQuantity: React.Dispatch<React.SetStateAction<number>>;
   onAddToCart: (beverage: Beverage) => void;
   closeDetails: () => void;
 };
 
-function BeverageDetails({ beverage, onAddToCart, closeDetails }: BeverageDetailsProps) {
+function BeverageDetails({
+  onAddToCart,
+  closeDetails,
+  setItemQuantity,
+  beverage,
+  quantity,
+}: BeverageDetailsProps) {
   return (
     <section className="beverage-details">
       <div>
@@ -29,6 +39,10 @@ function BeverageDetails({ beverage, onAddToCart, closeDetails }: BeverageDetail
       >
         <label> Special Instructions: </label>
         <textarea placeholder="e.g., no ice, extra hot, etc." />
+        <QuantityBtn
+          itemQuantity={quantity}
+          setItemQuantity={setItemQuantity}
+        />
         <button type="submit" className="add-to-cart-button">
           Add to Order
         </button>
