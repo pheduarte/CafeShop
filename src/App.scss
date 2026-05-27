@@ -219,6 +219,13 @@
   flex-direction: column;
   gap: 0;
   padding: 0 1px 104px;
+
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // old Edge/IE
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome/Safari
+  }
 }
 
 .beverage-list h2 {
@@ -790,7 +797,6 @@ h1 {
   color: var(--text);
   resize: vertical;
 }
-
 
 /* --- Store Info --- */
 .store-info-card-header {

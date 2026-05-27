@@ -1,4 +1,4 @@
-import type { Beverage } from "./beverages";
+import type { cartItems } from "../components/Navigation";
 
 export type Order = {
   id?: string;
@@ -6,7 +6,7 @@ export type Order = {
   userId: string;
   customerName: string;
   time?: Date;
-  items: Beverage[];
+  items: cartItems[];
   total: number,
   type: "pickup" | "dinein";
   tableNumber?: number;

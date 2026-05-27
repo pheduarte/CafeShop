@@ -1,3 +1,9 @@
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
 .card-overlay {
   position: fixed;
   inset: 0;
@@ -16,10 +22,9 @@
   background: #f8f3e8;
   width: 100%;
   max-width: 100%;
-  min-height: 45vh;
-  max-height: 85vh;
-  overflow: hidden;
-  border-radius: 20px 20px 0 0;
+  min-height: 100vh;
+  min-height: 100dvh;
+  border-radius: 0;
   padding: 1.2rem;
   box-sizing: border-box;
   transform: translateY(40px) scale(0.98);
@@ -34,8 +39,12 @@
   opacity: 1;
 }
 
-.close-button-container {
+.admin-function-list {
   display: flex;
-  justify-content: space-between;
-  margin-bottom: 12px;
+  flex-direction: column;
+  margin-top: 1rem;
 }
+
+
+
+

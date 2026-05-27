@@ -2,15 +2,15 @@ import type { NavigationPages } from "../../../components/Navigation";
 import { useState } from "react";
 import OrderConfirmationCard from "./OrderConfirmation";
 import "./checkout.scss";
-import type { Beverage } from "../../../types/beverages";
 import type { Order } from "../../../types/orders";
 import { addNewOrder } from "../services/createOrder";
 import { useAuth } from "../../../hooks/useAuth";
 import { generateOrderNumber } from "../services/generateOrderNumbers";
+import type { cartItems } from "../../../components/Navigation";
 
 type CheckoutProps = {
-  cartItems: Beverage[];
-  setCartItems: React.Dispatch<React.SetStateAction<Beverage[]>>;
+  cartItems: cartItems[];
+  setCartItems: React.Dispatch<React.SetStateAction<cartItems[]>>;
   setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
   closeCheckout: () => void;
 };
@@ -25,7 +25,7 @@ export default function Checkout({
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [savedOrder, setSavedOrder] = useState<Order | null>(null);
 
-  const cartTotal = cartItems.reduce((total, item) => total + item.price, 0);
+  const cartTotal = cartItems.reduce((total, item) => total + (item.beverage.price) * item.quantity, 0);
 
   async function handlePay() {
     if (!user) {

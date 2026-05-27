@@ -3,15 +3,21 @@ import { getBeverages } from "../api/beverages";
 import type { Beverage } from "../types/beverages";
 import BeverageCard from "../global/ui/BeverageCard";
 import BeverageDetails from "./BeverageDetails";
+import type { cartItems } from "./Navigation";
 
 export function BeverageList({
   setCartItems,
+  quantity,
+  setItemQuantity,
 }: {
-  setCartItems: React.Dispatch<React.SetStateAction<Beverage[]>>;
+  setCartItems: React.Dispatch<React.SetStateAction<cartItems[]>>;
+  setItemQuantity: React.Dispatch<React.SetStateAction<number>>;
+  quantity: number;
 }) {
   const [beverages, setBeverages] = useState<Beverage[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState("");
+
   // Function to handle showing beverage details
   const [selectedBeverage, setSelectedBeverage] = useState<Beverage | null>(
     null,
@@ -31,10 +37,10 @@ export function BeverageList({
     }
 
     loadBeverages();
-  }, [beverages]);
+  }, []);
 
   if (loading) {
-    return <p>Loading beverages...</p>
+    return <p>Loading beverages...</p>;
   }
 
   if (error) {
@@ -43,7 +49,8 @@ export function BeverageList({
 
   // Function to handle adding a beverage to the cart
   function addToCart(beverage: Beverage) {
-    setCartItems((currentItems) => [...currentItems, beverage]);
+    setCartItems((currentItems) => [...currentItems, { beverage, quantity }]);
+    setItemQuantity(1);
   }
 
   function showDetails(beverage: Beverage) {
@@ -109,6 +116,8 @@ export function BeverageList({
               beverage={selectedBeverage}
               onAddToCart={addToCart}
               closeDetails={closeDetails}
+              quantity={quantity}
+              setItemQuantity={setItemQuantity}
             />
           </div>
         </div>

@@ -1,0 +1,68 @@
+.cart-list {
+  padding: 6px 15px;
+  margin: 0;
+  overflow-y: auto;
+  max-height: 600px;
+
+  scrollbar-width: none; // Firefox
+  -ms-overflow-style: none; // old Edge/IE
+
+  &::-webkit-scrollbar {
+    display: none; // Chrome/Safari
+  }
+
+  @media (min-width: 768px) {
+    max-width: 750px;
+    margin: 40px;
+    max-height: 600px;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 950px;
+    margin: 40px;
+    max-height: 695px;
+  }
+  .cart-item {
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: flex-start;
+    gap: 18px;
+    border-bottom: rgba(192, 192, 192, 0.341) 1px solid;
+  }
+
+  .card-beverage-title,
+  .card-beverage-price {
+    margin: 0;
+    font-size: var(--font-label);
+  }
+
+  .card-beverage-title {
+    font-weight: 600;
+  }
+
+  .card-beverage-quantity {
+    min-width: 54px;
+    padding: 0.4px 5px;
+    color: var(--accent);
+    text-align: center;
+    font-size: 0.7rem;
+    background: var(--accent-bg);
+    border: 1px solid var(--accent-border);
+    border-radius: 999px;
+    box-sizing: border-box;
+  }
+
+  .cart-item-container {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+    gap: 16px;
+  }
+
+  .remove-button {
+    margin-left: 0;
+  }
+}
