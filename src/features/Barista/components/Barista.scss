@@ -1,0 +1,70 @@
+.barista-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.barista-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(35, 30, 20, 0.18);
+  backdrop-filter: blur(1px);
+  z-index: 1000;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding: 0;
+}
+
+.barista-modal {
+  display: flex;
+  flex-direction: column;
+  background: #f8f3e8;
+  width: 100%;
+  max-width: 100%;
+  min-height: 100vh;
+  min-height: 100dvh;
+  border-radius: 0;
+  padding: 1.2rem;
+  box-sizing: border-box;
+  transform: translateY(40px) scale(0.98);
+  opacity: 0;
+  transition:
+    transform 0.3s ease,
+    opacity 0.3s ease;
+}
+
+.barista-modal.open {
+  transform: translateY(0) scale(1);
+  opacity: 1;
+}
+
+.barista-function-list {
+display: flex;
+flex-direction: column;
+margin-top: 1rem;
+}
+
+.barista-function-items {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  border-bottom: var(--border) 1px solid;
+  padding: 1rem;
+
+  font-size: 0.875rem;
+  font-weight: 700;
+
+  button {
+    background: transparent;
+    border: none;
+    color: var(--accent);
+    cursor: pointer;
+  }
+}
+
+.barista-function-items:hover {
+    cursor: pointer;
+    filter: brightness(1.2);
+  }
