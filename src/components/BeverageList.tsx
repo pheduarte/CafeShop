@@ -4,6 +4,7 @@ import type { Beverage } from "../types/beverages";
 import BeverageCard from "../global/ui/BeverageCard";
 import BeverageDetails from "./BeverageDetails";
 import type { cartItems } from "./Navigation";
+import { LoadingIndicator } from "../global/ui/LoadingIndicator";
 
 export function BeverageList({
   setCartItems,
@@ -40,7 +41,7 @@ export function BeverageList({
   }, []);
 
   if (loading) {
-    return <p>Loading beverages...</p>;
+    return <LoadingIndicator />;
   }
 
   if (error) {

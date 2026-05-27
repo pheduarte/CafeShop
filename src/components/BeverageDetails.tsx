@@ -1,6 +1,7 @@
 import { QuantityBtn } from "../global/ui/QuantityBtn";
 import React from "react";
 import type { Beverage } from "../types/beverages";
+import "./BeverageDetails.scss";
 
 type BeverageDetailsProps = {
   beverage: Beverage;
@@ -39,13 +40,16 @@ function BeverageDetails({
       >
         <label> Special Instructions: </label>
         <textarea placeholder="e.g., no ice, extra hot, etc." />
-        <QuantityBtn
-          itemQuantity={quantity}
-          setItemQuantity={setItemQuantity}
-        />
-        <button type="submit" className="add-to-cart-button">
-          Add to Order
-        </button>
+
+        <div className="beverage-details-quantity-order">
+          <QuantityBtn
+            itemQuantity={quantity}
+            setItemQuantity={setItemQuantity}
+          />
+          <button type="submit" className="add-to-cart-button">
+            Add to Order
+          </button>
+        </div>
       </form>
     </section>
   );

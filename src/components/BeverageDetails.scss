@@ -1,7 +1,77 @@
 .quantity-section {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1rem 0;
+}
+
+.beverage-details-instructions {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.beverage-details-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(35, 30, 20, 0.18);
+  backdrop-filter: blur(1px);
+  z-index: 1000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.beverage-details-modal {
+  display: flex;
+  flex-direction: column;
+  background: #f8f3e8;
+  width: 100%;
+  max-width: 380px;
+  border-radius: 20px;
+  padding: 1.5rem;
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.2);
+}
+
+.beverage-details-modal .close-button-container {
+  justify-content: flex-end;
+}
+
+.beverage-details-instructions {
+  display: flex;
+  flex-direction: column;
+  margin-top: 1rem;
+  font-size: 16px;
+  color: var(--text);
+}
+
+.beverage-details-image {
+  width: 60%;
+  height: 180px;
+  margin: 0 auto;
+  background: var(--image-bg, #f5f5f5);
+  border-radius: 12px;
+  display: block;
+  object-fit: cover;
+}
+
+.beverage-details-instructions textarea {
+  margin-top: 8px;
+  padding: 8px 12px;
+  font-size: 16px;
+  border: 1px solid var(--border);
+  border-radius: 6px;
+  background: var(--bg);
+  color: var(--text);
+  resize: vertical;
+}
+
+.beverage-details-quantity-order {
     display: flex;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding: 1rem 0;
 }

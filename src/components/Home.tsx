@@ -42,7 +42,7 @@ export default function Home({
               setItemQuantity={setItemQuantity}
               quantity={quantity}
             />
-            <button onClick={toggleCart}>
+            <button onClick={toggleCart} className="cartbar">
               <CartBar cartItems={cartItems} />
             </button>
           </div>
