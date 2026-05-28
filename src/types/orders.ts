@@ -2,7 +2,7 @@ import type { cartItems } from "./cart";
 
 export type Order = {
   id?: string;
-  orderNumber: number;
+  orderNumber: string;
   userId: string;
   customerName: string;
   time?: Date;

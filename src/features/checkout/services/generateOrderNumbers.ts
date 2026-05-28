@@ -1,3 +1,3 @@
-export function generateOrderNumber(): number {
-  return Number(Date.now().toString().slice(-4));
+export function generateOrderNumber(): string {
+  return `ORD-${Date.now()}`;
 }

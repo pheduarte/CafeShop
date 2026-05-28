@@ -1,5 +1,5 @@
 import { QuantityBtn } from "../global/ui/QuantityBtn";
-import React from "react";
+import React, { useState } from "react";
 import type { Beverage } from "../types/beverages";
 import "./BeverageDetails.scss";
 
@@ -18,6 +18,8 @@ function BeverageDetails({
   beverage,
   quantity,
 }: BeverageDetailsProps) {
+  const [specialInstructions, setSpecialInstructions] = useState("");
+
   return (
     <section className="beverage-details">
       <div>
@@ -39,7 +41,11 @@ function BeverageDetails({
         }}
       >
         <label> Special Instructions: </label>
-        <textarea placeholder="e.g., no ice, extra hot, etc." />
+        <textarea
+          value={specialInstructions}
+          onChange={(e) => setSpecialInstructions(e.target.value)}
+          placeholder="e.g., no ice, extra hot, etc."
+        />
 
         <div className="beverage-details-quantity-order">
           <QuantityBtn
