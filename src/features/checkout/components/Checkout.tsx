@@ -7,6 +7,8 @@ import { addNewOrder } from "../services/createOrder";
 import { useAuth } from "../../../hooks/useAuth";
 import { generateOrderNumber } from "../services/generateOrderNumbers";
 import type { cartItems } from "../../../types/cart";
+import PaymentForm from "./PaymentForm";
+import { IconCreditCard } from "@tabler/icons-react";
 
 type CheckoutProps = {
   cartItems: cartItems[];
@@ -24,6 +26,8 @@ export default function Checkout({
   const { user } = useAuth();
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [savedOrder, setSavedOrder] = useState<Order | null>(null);
+
+  const [openCardPayment, setOpenCardPayment] = useState(false);
 
   const cartTotal = cartItems.reduce(
     (total, item) => total + item.beverage.price * item.quantity,
@@ -64,7 +68,6 @@ export default function Checkout({
     }
   }
 
-  //
   function closeConfirmation() {
     setConfirmationOpen(false);
     setCartItems([]);
@@ -72,55 +75,41 @@ export default function Checkout({
     setCurrentPage("home");
   }
 
+  function showCardFields() {
+    setOpenCardPayment(true);
+  }
+
+  function closeCardFields() {
+    setOpenCardPayment(false);
+  }
+
   return (
     <>
-      <div className="close-button-container">
-        <div>
-          <h2>Checkout</h2>
-        </div>
+      <div className="admin-card-header">
+        <h2>Checkout</h2>
         <button className="close-button" onClick={closeCheckout}>
           ×
         </button>
       </div>
 
-      <div className="checkout-form">
-        <label>
-          Name:
-          <input type="text" name="name" />
-        </label>
+      <button className="card-pay-btn" onClick={showCardFields}>
+        <IconCreditCard stroke={1} />
+        Credit/Debit Card
+      </button>
 
-        <label>
-          Card Number:
-          <input type="text" name="cardNumber" />
-        </label>
+      {openCardPayment && (
+        <PaymentForm
+          onCloseCheckout={closeCardFields}
+          onHandlePay={handlePay}
+        />
+      )}
 
-        <label>
-          Expiration Date:
-          <input type="text" name="expirationDate" />
-        </label>
-
-        <label>
-          CVV:
-          <input type="text" name="cvv" />
-        </label>
-      </div>
-
-      <div className="checkout-btn-container">
-        <button className="cancel-button" onClick={closeCheckout}>
-          Cancel
-        </button>
-
-        <button className="submit-button" onClick={handlePay}>
-          Pay
-        </button>
-      </div>
-
-      {confirmationOpen && (
+      {confirmationOpen && savedOrder && (
         <div className="order-card-overlay">
           <div className="order-card-modal open">
             <OrderConfirmationCard
               closeCard={closeConfirmation}
-              order={savedOrder!}
+              order={savedOrder}
             />
           </div>
         </div>

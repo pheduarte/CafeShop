@@ -31,3 +31,16 @@
   transform: translateY(0) scale(1);
   opacity: 1;
 }
+
+.card-pay-btn {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-around;
+  font: 1em sans-serif;
+  color: var(--accent);
+  padding: 1rem;
+  background: var(--bg);
+  border: var(--border) 1px solid;
+  border-radius: 20px;
+}

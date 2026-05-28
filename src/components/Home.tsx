@@ -54,7 +54,7 @@ export default function Home({
                 onClick={(event) => event.stopPropagation()}
               >
                 <div className="overlay-header">
-                  <p>Review Your Order</p>
+                  <h3>Review Your Order</h3>
                   <button className="close-button" onClick={toggleCart}>
                     x
                   </button>
