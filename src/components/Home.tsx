@@ -1,10 +1,10 @@
 import { useState } from "react";
-import type { NavigationPages } from "./Navigation";
+import type { NavigationPages } from "../types/navigation";
 import { BeverageList } from "./BeverageList";
 import CartBar from "./CartBar";
 import Cart from "../features/cart/components/Cart";
 import Header from "./Header";
-import type { cartItems } from "./Navigation";
+import type { cartItems } from "../types/cart";
 import "./Home.scss";
 
 type HomeProps = {

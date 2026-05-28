@@ -1,8 +1,8 @@
-import type { NavigationPages } from "../../../components/Navigation";
+import type { NavigationPages } from "../../../types/navigation";
 import Checkout from "../../checkout/components/Checkout";
 import { useState } from "react";
 import "../../../global/ui/cardOverlay.scss";
-import type { cartItems } from "../../../components/Navigation";
+import type { cartItems } from "../../../types/cart";
 import "./Cart.scss";
 
 function Cart({

@@ -1,5 +1,5 @@
 import { IconShoppingCart } from "@tabler/icons-react";
-import type { cartItems } from "./Navigation";
+import type { cartItems } from "../types/cart";
 import "./CartBar.scss"
 
 function CartBar({ cartItems }: { cartItems: cartItems[] }) {

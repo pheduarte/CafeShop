@@ -1,4 +1,4 @@
-import type { NavigationPages } from "../../../components/Navigation";
+import type { NavigationPages } from "../../../types/navigation";
 import { useState } from "react";
 import OrderConfirmationCard from "./OrderConfirmation";
 import "./checkout.scss";
@@ -6,7 +6,7 @@ import type { Order } from "../../../types/orders";
 import { addNewOrder } from "../services/createOrder";
 import { useAuth } from "../../../hooks/useAuth";
 import { generateOrderNumber } from "../services/generateOrderNumbers";
-import type { cartItems } from "../../../components/Navigation";
+import type { cartItems } from "../../../types/cart";
 
 type CheckoutProps = {
   cartItems: cartItems[];
@@ -25,7 +25,10 @@ export default function Checkout({
   const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [savedOrder, setSavedOrder] = useState<Order | null>(null);
 
-  const cartTotal = cartItems.reduce((total, item) => total + (item.beverage.price) * item.quantity, 0);
+  const cartTotal = cartItems.reduce(
+    (total, item) => total + item.beverage.price * item.quantity,
+    0,
+  );
 
   async function handlePay() {
     if (!user) {
@@ -61,7 +64,7 @@ export default function Checkout({
     }
   }
 
-  // 
+  //
   function closeConfirmation() {
     setConfirmationOpen(false);
     setCartItems([]);

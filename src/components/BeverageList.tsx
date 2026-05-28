@@ -3,7 +3,7 @@ import { getBeverages } from "../api/beverages";
 import type { Beverage } from "../types/beverages";
 import BeverageCard from "../global/ui/BeverageCard";
 import BeverageDetails from "./BeverageDetails";
-import type { cartItems } from "./Navigation";
+import type { cartItems } from "../types/cart";
 import { LoadingIndicator } from "../global/ui/LoadingIndicator";
 
 export function BeverageList({
