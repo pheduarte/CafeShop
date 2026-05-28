@@ -1,5 +1,5 @@
 import "./App.scss";
-import { useState } from "react";
+import { useAuth } from "./hooks/useAuth";
 import Navigation from "./components/Navigation";
 import Drawer from "./features/drawer/components/Drawer";
 import { DrawerProvider } from "./context/DrawerProvider";
@@ -7,19 +7,19 @@ import type { User } from "./types/user";
 import { signUpUser } from "./features/auth/services/signUpUser";
 
 function App() {
-  const [currentUser, setCurrentUser] = useState<User | undefined>(undefined);
+  const { user, login } = useAuth();
 
-  function handleSignIn(user: User) {
-    setCurrentUser(user);
-    alert(`Welcome back, ${user.name}!`);
+  function handleSignIn() {
+    alert(`Welcome back, ${user!.name}!`);
   }
 
   async function handleSignUp(newUser: User, password: string) {
     try {
-      await signUpUser(newUser, password);
+      const createdUser = await signUpUser(newUser, password);
+      login(createdUser);
       alert("Account created successfully!");
     } catch (error) {
-      alert("Somenthing went wrong!");
+      alert("Something went wrong!");
       console.log(`${error}`);
     }
   }
@@ -29,11 +29,7 @@ function App() {
       <main className="App">
         <Navigation navigation="home" />
       </main>
-      <Drawer
-        userName={currentUser}
-        onSignUp={handleSignUp}
-        onSignIn={handleSignIn}
-      />
+      <Drawer onSignUp={handleSignUp} onSignIn={handleSignIn} />
     </DrawerProvider>
   );
 }

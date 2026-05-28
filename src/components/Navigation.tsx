@@ -2,18 +2,14 @@ import Home from "./Home";
 import Checkout from "../features/checkout/components/Checkout";
 import { useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";
-import type { Beverage } from "../types/beverages";
+import type { cartItems } from "../types/cart";
+import type { NavigationPages } from "../types/navigation";
 
-export type NavigationPages = "home" | "checkout" | "cart";
 
 type NavigationProps = {
   navigation: NavigationPages;
 };
 
-export type cartItems = {
-  beverage: Beverage;
-  quantity: number;
-}
 
 function Navigation({ navigation,  }: NavigationProps) {
   const [cartItems, setCartItems, removeCartItems] = useLocalStorage<

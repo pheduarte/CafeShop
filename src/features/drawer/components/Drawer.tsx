@@ -15,12 +15,11 @@ import "../../Barista/components/Barista.scss";
 import Barista from "../../Barista/components/Barista";
 
 type DrawerProps = {
-  userName?: User;
-  onSignUp: (user: User, password: string) => void;
+  onSignUp: (user: User, password: string) => Promise<void>;
   onSignIn: (user: User, password: string) => void;
 };
 
-export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
+export default function Drawer({ onSignUp, onSignIn }: DrawerProps) {
   const { user, isLoggedIn, logout } = useAuth();
 
   const { isOpen, closeDrawer } = useDrawer();
@@ -40,9 +39,13 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
     setShowSignUp(false);
   }
 
-  function handleSignUp(user: User, password: string) {
-    closeSignUp();
-    onSignUp(user, password);
+  async function handleSignUp(user: User, password: string) {
+    try {
+      await onSignUp(user, password);
+      closeSignUp();
+    } catch {
+      setShowSignUp(true);
+    }
   }
 
   function openSignIn() {
@@ -212,11 +215,7 @@ export default function Drawer({ onSignUp, userName, onSignIn }: DrawerProps) {
             className="card-modal open"
             onClick={(event) => event.stopPropagation()}
           >
-            <SignUp
-              user={userName}
-              onSignUp={handleSignUp}
-              closeSignUp={closeSignUp}
-            />
+            <SignUp onSignUp={handleSignUp} closeSignUp={closeSignUp} />
           </div>
         </div>
       )}

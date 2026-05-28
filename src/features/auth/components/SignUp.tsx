@@ -8,7 +8,6 @@ import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 
 type SignUpProps = {
-  user?: User;
   onSignUp: (user: User, password: string) => void;
   closeSignUp: () => void;
 };
