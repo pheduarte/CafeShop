@@ -1,0 +1,47 @@
+.card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.card-form {
+  display: flex;
+  flex-direction: column;
+
+  @media (min-width: 768px) {
+    max-width: 450px;
+    padding: 24px;
+  }
+
+  @media (min-width: 1024px) {
+    max-width: 500px;
+    padding: 32px;
+  }
+
+  input {
+    font-size: 16px;
+  }
+
+  select {
+    font-size: 16px;
+    background: var(--bg);
+    color: var(--accent)
+  }
+}
+
+.buttons {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-end;
+  margin-top: 1rem;
+  gap: 1rem;
+
+  button {
+    padding: 0.7rem;
+    border: var(--accent) 1px solid;
+    background: var(--bg);
+    font-weight: 700;
+    color: var(--accent);
+    border-radius: 10px;
+  }
+}

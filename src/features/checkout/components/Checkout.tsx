@@ -41,6 +41,11 @@ export default function Checkout({
       return;
     }
 
+    if (!user.id) {
+      alert("Could not identify the signed-in user. Please sign in again.");
+      return;
+    }
+
     const newOrder: Order = {
       orderNumber: generateOrderNumber(),
       userId: user.id,

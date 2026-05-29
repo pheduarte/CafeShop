@@ -18,7 +18,7 @@ export async function signUpUser(user: User, password: string) {
     lastName: user.lastName,
     email: user.email,
     mobile: user.mobile,
-    role: "customer",
+    role: user.role,
   };
 
   await setDoc(doc(db, "users", firebaseUser.uid), newUserData);
