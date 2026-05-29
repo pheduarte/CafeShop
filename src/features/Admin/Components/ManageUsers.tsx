@@ -7,7 +7,7 @@ import "../../../global/ui/cardOverlay.scss";
 import type { User } from "../../../types/user";
 import { getUsers } from "../../../api/users";
 import { useState, useEffect } from "react";
-import EditUser from "./EditUser";
+import AddUser from "./AddUser";
 
 type ManageUsersProps = {
   onCloseButton: () => void;
@@ -25,20 +25,49 @@ function ManageUsers({ onCloseButton }: ManageUsersProps) {
   //   );
 
   useEffect(() => {
-    async function loadUsers() {
+    let ignore = false;
+
+    async function loadInitialUsers() {
       try {
         const data = await getUsers();
-        setUsers(data);
+
+        if (!ignore) {
+          setUsers(data);
+        }
       } catch (err) {
         console.error("Error fetching users:", err);
-        setError("Failed to load users. Please try again later.");
+
+        if (!ignore) {
+          setError("Failed to load users. Please try again later.");
+        }
       } finally {
-        setLoading(false);
+        if (!ignore) {
+          setLoading(false);
+        }
       }
     }
 
-    loadUsers();
+    loadInitialUsers();
+
+    return () => {
+      ignore = true;
+    };
   }, []);
+
+  async function refreshUsers() {
+    try {
+      setLoading(true);
+      setError("");
+
+      const data = await getUsers();
+      setUsers(data);
+    } catch (err) {
+      console.error("Error fetching users:", err);
+      setError("Failed to load users. Please try again later.");
+    } finally {
+      setLoading(false);
+    }
+  }
 
   if (loading) {
     return <LoadingIndicator />;
@@ -97,9 +126,15 @@ function ManageUsers({ onCloseButton }: ManageUsersProps) {
       </section>
 
       {createUserForm && (
-        <section className="card-overlay" onClick={() => setCreateUserForm(false)}>
+        <section
+          className="card-overlay"
+          onClick={() => setCreateUserForm(false)}
+        >
           <div className="card-modal open" onClick={(e) => e.stopPropagation()}>
-            <EditUser closeForm={() => setCreateUserForm(false)} />
+            <AddUser
+              closeForm={() => setCreateUserForm(false)}
+              onUserCreated={refreshUsers}
+            />
           </div>
         </section>
       )}

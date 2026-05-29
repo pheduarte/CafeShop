@@ -4,8 +4,9 @@ import type { User } from "../../../types/user";
 import { signUpUser } from "../../auth/services/signUpUser";
 import "./EditUser.scss";
 
-type EditUserProps = {
+type AddUserProps = {
   closeForm: () => void;
+  onUserCreated: () => Promise<void>;
 };
 
 type newUserProps = {
@@ -26,10 +27,10 @@ const initialFormData: newUserProps = {
   password: "",
 };
 
-function EditUser({ closeForm }: EditUserProps) {
+function AddUser({ closeForm, onUserCreated }: AddUserProps) {
   const [newUser, setNewUser] = useState<newUserProps>(initialFormData);
 
-  function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
 
     const createNewUser: newUserProps = {
@@ -43,10 +44,17 @@ function EditUser({ closeForm }: EditUserProps) {
       password: newUser.password,
     };
 
-    signUpUser(createNewUser.user, createNewUser.password);
+    try {
+      await signUpUser(createNewUser.user, createNewUser.password);
+      await onUserCreated();
 
-    setNewUser(initialFormData);
-    closeForm();
+      setNewUser(initialFormData);
+      alert("User created.");
+      closeForm();
+    } catch (error) {
+      console.log(`Failed to create user: ${error}`);
+      alert("Failed to create user. Please try again.");
+    }
   }
 
   function updateUserField<Field extends keyof User>(
@@ -129,4 +137,4 @@ function EditUser({ closeForm }: EditUserProps) {
   );
 }
 
-export default EditUser;
+export default AddUser;

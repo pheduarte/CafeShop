@@ -7,7 +7,7 @@ import type { User } from "./types/user";
 import { signUpUser } from "./features/auth/services/signUpUser";
 
 function App() {
-  const { user, login } = useAuth();
+  const { user } = useAuth();
 
   function handleSignIn() {
     alert(`Welcome back, ${user!.name}!`);
@@ -15,8 +15,7 @@ function App() {
 
   async function handleSignUp(newUser: User, password: string) {
     try {
-      const createdUser = await signUpUser(newUser, password);
-      login(createdUser);
+      await signUpUser(newUser, password);
       alert("Account created successfully!");
     } catch (error) {
       alert("Something went wrong!");

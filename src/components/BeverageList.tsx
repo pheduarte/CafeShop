@@ -61,6 +61,7 @@ export function BeverageList({
 
   function closeDetails() {
     setSelectedBeverage(null);
+    setItemQuantity(1);
   }
 
   const icedBeverages = beverages.filter(
