@@ -1,0 +1,49 @@
+.table-order-list {
+  border: 1px solid black;
+  border-collapse: collapse;
+  font-size: 0.785rem;
+
+  @media (min-width: 768px) {
+    font-size: 0.785rem;
+  }
+}
+
+.table-order-list th {
+  border: 1px solid var(--accent);
+  padding: 0.2rem;
+  border-collapse: collapse;
+
+  @media (min-width: 768px) {
+    padding: 0.5rem;
+    font-size: 0.785rem;
+  }
+}
+
+.table-order-list td {
+  border: 1px solid var(--accent);
+  padding: 0.2rem;
+  border-collapse: collapse;
+
+  @media (min-width: 768px) {
+    padding: 0.5rem;
+    font-size: 0.785rem;
+  }
+}
+
+.table-user-list tr:hover {
+  filter: brightness(1.2);
+}
+
+.table-user-list button {
+  cursor: pointer;
+}
+
+.refresh-btn {
+  padding: 0.7rem;
+  border: var(--accent) 1px solid;
+  background: var(--bg);
+  font-weight: 700;
+  color: var(--accent);
+  border-radius: 10px;
+  margin: 1rem 0 1rem 0;
+}

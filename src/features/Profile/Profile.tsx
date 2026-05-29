@@ -1,5 +1,6 @@
 import { CloseButton } from "../../global/ui/closeButton";
 import { LoadingIndicator } from "../../global/ui/LoadingIndicator";
+import "./Profile.scss";
 import { useState, useEffect } from "react";
 import type { Order } from "../../types/orders";
 import { getOrders } from "../../api/orders";
@@ -88,34 +89,37 @@ function Profile({ onCloseButton }: ProfileProps) {
             <h3>No recent orders</h3>
           </>
         ) : (
-          <table className="table-user-list">
-            <thead>
-              <tr>
-                <th>Order number</th>
-                <th>Table</th>
-                <th>Type</th>
-                <th>Status</th>
-                <th>Time</th>
-              </tr>
-            </thead>
-
-            <tbody>
-              {filteredOrders.map((order) => (
-                <tr key={order.id ?? order.orderNumber}>
-                  <td>{order.orderNumber}</td>
-                  <td>{order.tableNumber}</td>
-                  <td>{order.type}</td>
-                  <td>{order.status}</td>
-                  <td>
-                    {order.createdAt?.toDate().toLocaleString("en-AU", {
-                      dateStyle: "short",
-                      timeStyle: "short",
-                    })}
-                  </td>
+          <section>
+            <h3>Latest Orders</h3>
+            <table className="table-order-list">
+              <thead>
+                <tr>
+                  <th>Order number</th>
+                  <th>Table</th>
+                  <th>Type</th>
+                  <th>Status</th>
+                  <th>Time</th>
                 </tr>
-              ))}
-            </tbody>
-          </table>
+              </thead>
+
+              <tbody>
+                {filteredOrders.map((order) => (
+                  <tr key={order.id ?? order.orderNumber}>
+                    <td>{order.orderNumber}</td>
+                    <td>{order.tableNumber}</td>
+                    <td>{order.type}</td>
+                    <td>{order.status}</td>
+                    <td>
+                      {order.createdAt?.toDate().toLocaleString("en-AU", {
+                        dateStyle: "short",
+                        timeStyle: "short",
+                      })}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </section>
         )}
       </div>
     </>
