@@ -19,11 +19,6 @@ function ManageUsers({ onCloseButton }: ManageUsersProps) {
   const [error, setError] = useState("");
   const [createUserForm, setCreateUserForm] = useState(false);
 
-  //   // Function to handle showing user details
-  //   const [selectedUser, setSelectedUser] = useState<User | null>(
-  //     null,
-  //   );
-
   useEffect(() => {
     let ignore = false;
 

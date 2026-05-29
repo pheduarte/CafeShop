@@ -226,6 +226,21 @@
   &::-webkit-scrollbar {
     display: none; // Chrome/Safari
   }
+
+  @media (min-width: 1024px) {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 8px;
+    padding-inline: 16px;
+  }
+}
+
+.beverage-section-heading {
+  margin-top: 2rem;
+
+  @media (min-width: 1024px) {
+    grid-column: 1 / -1;
+  }
 }
 
 .beverage-list h2 {
@@ -316,6 +331,10 @@
       max-width: 36%;
       padding: 8px;
     }
+  }
+
+  @media (min-width: 1024px) {
+    margin: 0;
   }
 }
 

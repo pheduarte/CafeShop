@@ -7,6 +7,7 @@ import { useState } from "react";
 import { CloseButton } from "../../../global/ui/closeButton";
 import ManageUsers from "./ManageUsers";
 import "../../../global/ui/cardOverlay.scss";
+import OrderHistory from "./OrderHistory";
 
 type AdminPanelProps = {
   closeAdminPanel: () => void;
@@ -15,6 +16,7 @@ type AdminPanelProps = {
 function AdminPanel({ closeAdminPanel }: AdminPanelProps) {
   const [openAddNewBeverage, setOpenAddNewBeverage] = useState(false);
   const [openManageUsersCard, setOpenManagerUsersCard] = useState(false);
+  const [OpenOrders, setOpenOrders] = useState(false);
 
   //Get data from new beverage form
   function addNewBeverage(list: Beverage) {
@@ -37,6 +39,14 @@ function AdminPanel({ closeAdminPanel }: AdminPanelProps) {
     setOpenManagerUsersCard(false);
   }
 
+  function openOrderHistory() {
+    setOpenOrders(true);
+  }
+
+  function closeOrderHistory() {
+    setOpenOrders(false);
+  }
+
   return (
     <>
       <div className="admin-card-header">
@@ -44,16 +54,22 @@ function AdminPanel({ closeAdminPanel }: AdminPanelProps) {
         <CloseButton onCloseButton={closeAdminPanel} />
       </div>
       <div className="admin-function-list">
-        <div className="admin-function-items">
+        <div className="admin-function-items" onClick={openAddNewBeverageForm}>
           <p>Add beverage to catalog</p>
 
-          <button onClick={openAddNewBeverageForm}>
+          <button>
             <IconMathGreater stroke={2} />
           </button>
         </div>
-        <div className="admin-function-items">
+        <div className="admin-function-items" onClick={openManageUsers}>
           <p>Manage Users</p>
-          <button type="button" onClick={openManageUsers}>
+          <button type="button">
+            <IconMathGreater stroke={2} />
+          </button>
+        </div>
+        <div className="admin-function-items" onClick={openOrderHistory}>
+          <p>Order History</p>
+          <button type="button">
             <IconMathGreater stroke={2} />
           </button>
         </div>
@@ -80,6 +96,17 @@ function AdminPanel({ closeAdminPanel }: AdminPanelProps) {
             onClick={(event) => event.stopPropagation()}
           >
             <ManageUsers onCloseButton={closeManageUsers} />
+          </div>
+        </div>
+      )}
+
+      {OpenOrders && (
+        <div className="card-overlay" onClick={closeOrderHistory}>
+          <div
+            className={`card-modal ${OpenOrders ? "open" : ""}`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <OrderHistory onCloseButton={closeOrderHistory} />
           </div>
         </div>
       )}

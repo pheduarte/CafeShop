@@ -2,7 +2,7 @@ import { useState } from "react";
 import { CloseButton } from "../../../global/ui/closeButton";
 import type { User } from "../../../types/user";
 import { signUpUser } from "../../auth/services/signUpUser";
-import "./EditUser.scss";
+import "./AddUser.scss";
 
 type AddUserProps = {
   closeForm: () => void;

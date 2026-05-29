@@ -76,7 +76,9 @@ export function BeverageList({
     <div>
       <section>
         <div className="beverage-list">
-          <div>{hotBeverages.length > 0 && <h2>Hot Beverages</h2>}</div>
+          <div className="beverage-section-heading">
+            {hotBeverages.length > 0 && <h2>Hot Beverages</h2>}
+          </div>
           {hotBeverages.map((beverage) => (
             <BeverageCard
               key={beverage.id}
@@ -84,7 +86,9 @@ export function BeverageList({
               onShowDetails={showDetails}
             />
           ))}
-          <div>{icedBeverages.length > 0 && <h2>Iced Beverages</h2>}</div>
+          <div className="beverage-section-heading">
+            {icedBeverages.length > 0 && <h2>Iced Beverages</h2>}
+          </div>
           {icedBeverages.map((beverage) => (
             <BeverageCard
               key={beverage.id}
@@ -92,7 +96,7 @@ export function BeverageList({
               onShowDetails={showDetails}
             />
           ))}
-          <div>
+          <div className="beverage-section-heading">
             {specialBeverages.length > 0 && <h2>Specialty Beverages</h2>}
           </div>
           {specialBeverages.map((beverage) => (

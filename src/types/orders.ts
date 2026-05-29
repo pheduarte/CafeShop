@@ -1,11 +1,13 @@
 import type { cartItems } from "./cart";
+import { Timestamp } from "firebase/firestore";
+
 
 export type Order = {
   id?: string;
   orderNumber: string;
   userId: string;
   customerName: string;
-  time?: Date;
+  createdAt?: Timestamp;
   items: cartItems[];
   total: number;
   type: "pickup" | "dinein";

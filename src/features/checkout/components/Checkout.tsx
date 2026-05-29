@@ -10,6 +10,7 @@ import type { cartItems } from "../../../types/cart";
 import PaymentForm from "./PaymentForm";
 import { IconCreditCard } from "@tabler/icons-react";
 import { CloseButton } from "../../../global/ui/closeButton";
+import { Timestamp } from "firebase/firestore";
 
 type CheckoutProps = {
   cartItems: cartItems[];
@@ -51,6 +52,7 @@ export default function Checkout({
       userId: user.id,
       customerName: user.name,
       items: cartItems,
+      createdAt: Timestamp.now(),
       total: cartTotal,
       type: "pickup",
       tableNumber: 12,

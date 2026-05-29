@@ -13,6 +13,7 @@ import "../../Admin/Components/AdminPanel.scss";
 import "../../Barista/components/Barista.scss";
 import Barista from "../../Barista/components/Barista";
 import { CloseButton } from "../../../global/ui/closeButton";
+import Profile from "../../Profile/Profile";
 
 type DrawerProps = {
   onSignUp: (user: User, password: string) => Promise<void>;
@@ -29,6 +30,7 @@ export default function Drawer({ onSignUp, onSignIn }: DrawerProps) {
   const [showInfo, setShowInfo] = useState(false);
   const [showAdminPanel, setShowAdminPanel] = useState(false);
   const [showBaristaPanel, setShowBaristaPanel] = useState(false);
+  const [showProfile, setShowProfile] = useState(false);
 
   function openSignUp() {
     closeDrawer();
@@ -92,6 +94,14 @@ export default function Drawer({ onSignUp, onSignIn }: DrawerProps) {
 
   function closeBaristaPanel() {
     setShowBaristaPanel(false);
+  }
+
+  function openProfile() {
+    setShowProfile(true);
+  }
+
+  function closeProfile() {
+    setShowProfile(false);
   }
 
   return (
@@ -165,6 +175,18 @@ export default function Drawer({ onSignUp, onSignIn }: DrawerProps) {
                   key={item.id}
                   className="drawer-item"
                   onClick={openBaristaPanel}
+                >
+                  {item.label}
+                </button>
+              );
+            }
+
+            if (item.label === "Profile") {
+              return (
+                <button
+                  key={item.id}
+                  className="drawer-item"
+                  onClick={openProfile}
                 >
                   {item.label}
                 </button>
@@ -259,6 +281,17 @@ export default function Drawer({ onSignUp, onSignIn }: DrawerProps) {
             onClick={(event) => event.stopPropagation()}
           >
             <Barista closeBaristaPanel={closeBaristaPanel} />
+          </div>
+        </div>
+      )}
+
+      {showProfile && (
+        <div className="card-overlay" onClick={closeProfile}>
+          <div
+            className={`card-modal ${showProfile ? "open" : ""}`}
+            onClick={(event) => event.stopPropagation()}
+          >
+            <Profile onCloseButton={closeProfile} />
           </div>
         </div>
       )}
