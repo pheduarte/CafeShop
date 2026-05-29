@@ -6,6 +6,7 @@ import Cart from "../features/cart/components/Cart";
 import Header from "./Header";
 import type { cartItems } from "../types/cart";
 import "./Home.scss";
+import { CloseButton } from "../global/ui/closeButton";
 
 type HomeProps = {
   setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
@@ -27,7 +28,6 @@ export default function Home({
   const toggleCart = () => {
     setIsOpen((prev) => !prev);
   };
-
 
   return (
     <>
@@ -55,9 +55,7 @@ export default function Home({
               >
                 <div className="overlay-header">
                   <h3>Review Your Order</h3>
-                  <button className="close-button" onClick={toggleCart}>
-                    x
-                  </button>
+                  <CloseButton onCloseButton={toggleCart} />
                 </div>
 
                 <Cart

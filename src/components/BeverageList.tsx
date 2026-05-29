@@ -5,6 +5,7 @@ import BeverageCard from "../global/ui/BeverageCard";
 import BeverageDetails from "./BeverageDetails";
 import type { cartItems } from "../types/cart";
 import { LoadingIndicator } from "../global/ui/LoadingIndicator";
+import { CloseButton } from "../global/ui/closeButton";
 
 export function BeverageList({
   setCartItems,
@@ -102,6 +103,7 @@ export function BeverageList({
           ))}
         </div>
       </section>
+
       {selectedBeverage && (
         <div className="beverage-details-overlay" onClick={closeDetails}>
           <div
@@ -109,9 +111,7 @@ export function BeverageList({
             onClick={(event) => event.stopPropagation()}
           >
             <div className="close-button-container">
-              <button className="close-button " onClick={closeDetails}>
-                ×
-              </button>
+              <CloseButton onCloseButton={closeDetails} />
             </div>
             <BeverageDetails
               beverage={selectedBeverage}

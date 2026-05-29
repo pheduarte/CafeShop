@@ -1,11 +1,10 @@
 import { drawerNavigationItems } from "../../../data/drawerItems";
 import { useDrawer } from "../../../hooks/useDrawer";
-import { IconX } from "@tabler/icons-react";
 import SignUp from "../../auth/components/SignUp";
 import SignIn from "../../auth/components/SignIn";
 import type { User } from "../../../types/user";
 import { useState } from "react";
-import StoreInfo from "../../../components/Drawer/StoreInfo";
+import StoreInfo from "./StoreInfo";
 import "../../../global/ui/cardOverlay.scss";
 import "./drawer.scss";
 import { useAuth } from "../../../hooks/useAuth";
@@ -13,6 +12,7 @@ import AdminPanel from "../../Admin/Components/AdminPanel";
 import "../../Admin/Components/AdminPanel.scss";
 import "../../Barista/components/Barista.scss";
 import Barista from "../../Barista/components/Barista";
+import { CloseButton } from "../../../global/ui/closeButton";
 
 type DrawerProps = {
   onSignUp: (user: User, password: string) => Promise<void>;
@@ -107,8 +107,7 @@ export default function Drawer({ onSignUp, onSignIn }: DrawerProps) {
               className="drawer-logo"
             />
           </div>
-
-          <IconX stroke={2} onClick={closeDrawer} />
+          <CloseButton onCloseButton={closeDrawer} />
         </div>
 
         <div className="drawer-logged-user-title">

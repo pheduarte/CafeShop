@@ -1,3 +1,5 @@
+import { CloseButton } from "../../../global/ui/closeButton";
+
 type StoreInfoProps = {
   closeInfo: () => void;
 };
@@ -7,9 +9,7 @@ function StoreInfo({ closeInfo }: StoreInfoProps) {
     <>
       <div className="store-info-card-header">
         <p>Store Information</p>
-        <button className="close-button" onClick={closeInfo}>
-          ×
-        </button>
+        <CloseButton onCloseButton={closeInfo} />
       </div>
       <section>
         <header className="store-info-header">

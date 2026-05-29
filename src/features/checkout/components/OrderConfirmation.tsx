@@ -1,6 +1,7 @@
 import "./Order.scss";
 import type { Order } from "../../../types/orders";
 import { useAuth } from "../../../hooks/useAuth";
+import { CloseButton } from "../../../global/ui/closeButton";
 
 type ConfirmationProps = {
   closeCard: () => void;
@@ -14,9 +15,7 @@ function OrderConfirmationCard({ closeCard, order }: ConfirmationProps) {
     <>
       <div className="store-info-card-header">
         <p>Order Confirmation</p>
-        <button className="close-button" onClick={closeCard}>
-          ×
-        </button>
+        <CloseButton onCloseButton={closeCard} />
       </div>
       <section>
         <header className="order-card-header">

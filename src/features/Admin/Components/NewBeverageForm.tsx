@@ -1,6 +1,7 @@
 import "./NewBeverageForm.scss";
 import type { Beverage, BeverageType } from "../../../types/beverages";
 import { useState } from "react";
+import { CloseButton } from "../../../global/ui/closeButton";
 
 type NewBeverageFormProps = {
   addNewBeverage: (beverage: Beverage) => void;
@@ -47,9 +48,7 @@ function NewBeverageForm({ addNewBeverage, closeForm }: NewBeverageFormProps) {
     <section className="newBeverage-form-card">
       <header className="admin-card-header">
         <h2>New Beverage</h2>
-        <button className="close-button" onClick={closeForm}>
-          ×
-        </button>
+        <CloseButton onCloseButton={closeForm} />
       </header>
       <form className="newBeverage-form" onSubmit={handleSubmit}>
         <label>Beverage name:</label>

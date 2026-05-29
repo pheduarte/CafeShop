@@ -9,6 +9,7 @@ import { generateOrderNumber } from "../services/generateOrderNumbers";
 import type { cartItems } from "../../../types/cart";
 import PaymentForm from "./PaymentForm";
 import { IconCreditCard } from "@tabler/icons-react";
+import { CloseButton } from "../../../global/ui/closeButton";
 
 type CheckoutProps = {
   cartItems: cartItems[];
@@ -87,9 +88,7 @@ export default function Checkout({
     <>
       <div className="admin-card-header">
         <h2>Checkout</h2>
-        <button className="close-button" onClick={closeCheckout}>
-          ×
-        </button>
+        <CloseButton onCloseButton={closeCheckout} />
       </div>
 
       <button className="card-pay-btn" onClick={showCardFields}>
