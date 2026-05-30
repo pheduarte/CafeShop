@@ -1,12 +1,12 @@
 import { useState, Activity } from "react";
-import type { NavigationPages } from "../types/navigation";
-import { ProductList } from "./ProductList";
-import CartBar from "./CartBar";
-import Cart from "../features/cart/components/Cart";
-import Header from "./Header";
-import type { cartItems } from "../types/cart";
+import type { NavigationPages } from "../../types/navigation";
+import { ProductList } from "../../components/ProductList";
+import CartBar from "../../components/CartBar";
+import Cart from "../../features/cart/components/Cart";
+import Header from "../../components/Header";
+import type { cartItems } from "../../types/cart";
 import "./Home.scss";
-import { CloseButton } from "../global/ui/closeButton";
+import { CloseButton } from "../../global/ui/closeButton";
 
 type HomeProps = {
   setCurrentPage: React.Dispatch<React.SetStateAction<NavigationPages>>;
