@@ -7,7 +7,7 @@ import type { cartItems } from "../types/cart";
 import { LoadingIndicator } from "../global/ui/LoadingIndicator";
 import { CloseButton } from "../global/ui/closeButton";
 
-export function BeverageList({
+export function ProductList({
   setCartItems,
   quantity,
   setItemQuantity,

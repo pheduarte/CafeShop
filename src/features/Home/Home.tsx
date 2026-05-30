@@ -1,6 +1,6 @@
-import { useState } from "react";
+import { useState, Activity } from "react";
 import type { NavigationPages } from "../types/navigation";
-import { BeverageList } from "./BeverageList";
+import { ProductList } from "./ProductList";
 import CartBar from "./CartBar";
 import Cart from "../features/cart/components/Cart";
 import Header from "./Header";
@@ -37,7 +37,7 @@ export default function Home({
       <section>
         <div>
           <div className="home-overlay">
-            <BeverageList
+            <ProductList
               setCartItems={setCartItems}
               setItemQuantity={setItemQuantity}
               quantity={quantity}
@@ -47,7 +47,8 @@ export default function Home({
             </button>
           </div>
 
-          {isOpen && (
+          {/* {isOpen && ( */}
+          <Activity mode={isOpen ? "visible" : "hidden"}>
             <div className="card-overlay" onClick={toggleCart}>
               <div
                 className="card-modal open"
@@ -65,7 +66,8 @@ export default function Home({
                 />
               </div>
             </div>
-          )}
+          </Activity>
+          {/* )} */}
         </div>
       </section>
     </>

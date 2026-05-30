@@ -1,5 +1,5 @@
 import type { NavigationPages } from "../../../types/navigation";
-import { useState } from "react";
+import { Activity, useState } from "react";
 import OrderConfirmationCard from "./OrderConfirmation";
 import "./checkout.scss";
 import type { Order } from "../../../types/orders";
@@ -11,6 +11,8 @@ import PaymentForm from "./PaymentForm";
 import { IconCreditCard } from "@tabler/icons-react";
 import { CloseButton } from "../../../global/ui/closeButton";
 import { Timestamp } from "firebase/firestore";
+import { useDisclosure } from "../../../hooks/useDisclosure";
+
 
 type CheckoutProps = {
   cartItems: cartItems[];
@@ -26,10 +28,10 @@ export default function Checkout({
   closeCheckout,
 }: CheckoutProps) {
   const { user } = useAuth();
-  const [confirmationOpen, setConfirmationOpen] = useState(false);
   const [savedOrder, setSavedOrder] = useState<Order | null>(null);
 
-  const [openCardPayment, setOpenCardPayment] = useState(false);
+  const confirmationCard = useDisclosure();
+  const card = useDisclosure();
 
   const cartTotal = cartItems.reduce(
     (total, item) => total + item.beverage.price * item.quantity,
@@ -69,7 +71,7 @@ export default function Checkout({
         id: orderId,
       });
 
-      setConfirmationOpen(true);
+      confirmationCard.open();
     } catch (error) {
       console.error(error);
       alert("Could not place order. Please try again.");
@@ -77,18 +79,10 @@ export default function Checkout({
   }
 
   function closeConfirmation() {
-    setConfirmationOpen(false);
+    confirmationCard.close();
     setCartItems([]);
     closeCheckout();
     setCurrentPage("home");
-  }
-
-  function showCardFields() {
-    setOpenCardPayment(true);
-  }
-
-  function closeCardFields() {
-    setOpenCardPayment(false);
   }
 
   return (
@@ -98,19 +92,19 @@ export default function Checkout({
         <CloseButton onCloseButton={closeCheckout} />
       </div>
 
-      <button className="card-pay-btn" onClick={showCardFields}>
+      <button
+        className="card-pay-btn"
+        onClick={card.isOpen ? card.close : card.open}
+      >
         <IconCreditCard stroke={1} />
         Credit/Debit Card
       </button>
 
-      {openCardPayment && (
-        <PaymentForm
-          onCloseCheckout={closeCardFields}
-          onHandlePay={handlePay}
-        />
-      )}
+      <Activity mode={card.isOpen ? "visible" : "hidden"}>
+        <PaymentForm onCloseCheckout={card.close} onHandlePay={handlePay} />
+      </Activity>
 
-      {confirmationOpen && savedOrder && (
+      {confirmationCard.isOpen && savedOrder && (
         <div className="order-card-overlay">
           <div className="order-card-modal open">
             <OrderConfirmationCard

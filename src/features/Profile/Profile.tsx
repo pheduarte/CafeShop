@@ -5,6 +5,10 @@ import { useState, useEffect } from "react";
 import type { Order } from "../../types/orders";
 import { getOrders } from "../../api/orders";
 import { useAuth } from "../../hooks/useAuth";
+import { Modal } from "../../global/components/Modal";
+import { useDisclosure } from "../../hooks/useDisclosure";
+import { sortOrdersByNewestDate } from "../Order/helper/sortOrdersByNewestDate";
+import { filterOrdersByUserId } from "../Order/helper/filterOrderByUser";
 
 type ProfileProps = {
   onCloseButton: () => void;
@@ -16,6 +20,8 @@ function Profile({ onCloseButton }: ProfileProps) {
   const [orders, setOrders] = useState<Order[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState("");
+
+  const latestOrders = useDisclosure();
 
   useEffect(() => {
     let ignore = false;
@@ -70,7 +76,8 @@ function Profile({ onCloseButton }: ProfileProps) {
     return <p>{error}</p>;
   }
 
-  const filteredOrders = orders.filter((order) => order.userId === user?.id);
+  const filteredOrders = filterOrdersByUserId(orders, user?.id);
+  const sortedOrders = sortOrdersByNewestDate(filteredOrders);
 
   return (
     <>
@@ -84,41 +91,52 @@ function Profile({ onCloseButton }: ProfileProps) {
           Refresh
         </button>
 
-        {filteredOrders.length === 0 ? (
+        {sortedOrders.length === 0 ? (
           <>
             <h3>No recent orders</h3>
           </>
         ) : (
           <section>
-            <h3>Latest Orders</h3>
-            <table className="table-order-list">
-              <thead>
-                <tr>
-                  <th>Order number</th>
-                  <th>Table</th>
-                  <th>Type</th>
-                  <th>Status</th>
-                  <th>Time</th>
-                </tr>
-              </thead>
+            <div className="subheading">
+              <h3
+                onClick={
+                  latestOrders.isOpen ? latestOrders.close : latestOrders.open
+                }
+              >
+                Latest Orders
+              </h3>
+            </div>
 
-              <tbody>
-                {filteredOrders.map((order) => (
-                  <tr key={order.id ?? order.orderNumber}>
-                    <td>{order.orderNumber}</td>
-                    <td>{order.tableNumber}</td>
-                    <td>{order.type}</td>
-                    <td>{order.status}</td>
-                    <td>
-                      {order.createdAt?.toDate().toLocaleString("en-AU", {
-                        dateStyle: "short",
-                        timeStyle: "short",
-                      })}
-                    </td>
+            <Modal isOpen={latestOrders.isOpen} onClose={latestOrders.close}>
+              <table className="table-order-list">
+                <thead>
+                  <tr>
+                    <th>Order number</th>
+                    <th>Table</th>
+                    <th>Type</th>
+                    <th>Status</th>
+                    <th>Time</th>
                   </tr>
-                ))}
-              </tbody>
-            </table>
+                </thead>
+
+                <tbody>
+                  {sortedOrders.map((order) => (
+                    <tr key={order.id ?? order.orderNumber}>
+                      <td>{order.orderNumber}</td>
+                      <td>{order.tableNumber}</td>
+                      <td>{order.type}</td>
+                      <td>{order.status}</td>
+                      <td>
+                        {order.createdAt?.toDate().toLocaleString("en-AU", {
+                          dateStyle: "short",
+                          timeStyle: "short",
+                        })}
+                      </td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </Modal>
           </section>
         )}
       </div>

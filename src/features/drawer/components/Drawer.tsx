@@ -3,7 +3,6 @@ import { useDrawer } from "../../../hooks/useDrawer";
 import SignUp from "../../auth/components/SignUp";
 import SignIn from "../../auth/components/SignIn";
 import type { User } from "../../../types/user";
-import { useState } from "react";
 import StoreInfo from "./StoreInfo";
 import "../../../global/ui/cardOverlay.scss";
 import "./drawer.scss";
@@ -14,6 +13,9 @@ import "../../Barista/components/Barista.scss";
 import Barista from "../../Barista/components/Barista";
 import { CloseButton } from "../../../global/ui/closeButton";
 import Profile from "../../Profile/Profile";
+import "../../Profile/Profile.scss";
+import { useDisclosure } from "../../../hooks/useDisclosure";
+import { Modal } from "../../../global/components/Modal";
 
 type DrawerProps = {
   onSignUp: (user: User, password: string) => Promise<void>;
@@ -25,52 +27,40 @@ export default function Drawer({ onSignUp, onSignIn }: DrawerProps) {
 
   const { isOpen, closeDrawer } = useDrawer();
 
-  const [showSignUp, setShowSignUp] = useState(false);
-  const [showSignIn, setShowSignIn] = useState(false);
-  const [showInfo, setShowInfo] = useState(false);
-  const [showAdminPanel, setShowAdminPanel] = useState(false);
-  const [showBaristaPanel, setShowBaristaPanel] = useState(false);
-  const [showProfile, setShowProfile] = useState(false);
+  const signUp = useDisclosure();
+  const signIn = useDisclosure();
+  const storeInfo = useDisclosure();
+  const adminPanel = useDisclosure();
+  const baristaPanel = useDisclosure();
+  const profilePanel = useDisclosure();
 
   function openSignUp() {
     closeDrawer();
-    setShowSignUp(true);
-  }
-
-  function closeSignUp() {
-    setShowSignUp(false);
+    signUp.open();
   }
 
   async function handleSignUp(user: User, password: string) {
     try {
       await onSignUp(user, password);
-      closeSignUp();
+      signUp.close();
     } catch {
-      setShowSignUp(true);
+      signUp.open();
     }
   }
 
   function openSignIn() {
     closeDrawer();
-    setShowSignIn(true);
-  }
-
-  function closeSignIn() {
-    setShowSignIn(false);
+    signIn.open();
   }
 
   function handleSignIn(user: User, password: string) {
-    closeSignIn();
+    signIn.close();
     onSignIn(user, password);
   }
 
   function openStoreInfo() {
     closeDrawer();
-    setShowInfo(true);
-  }
-
-  function closeStoreInfo() {
-    setShowInfo(false);
+    storeInfo.open();
   }
 
   function handleLogout() {
@@ -80,28 +70,17 @@ export default function Drawer({ onSignUp, onSignIn }: DrawerProps) {
 
   function openAdminPanel() {
     closeDrawer();
-    setShowAdminPanel(true);
-  }
-
-  function closeAdminPanel() {
-    setShowAdminPanel(false);
+    adminPanel.open();
   }
 
   function openBaristaPanel() {
     closeDrawer();
-    setShowBaristaPanel(true);
-  }
-
-  function closeBaristaPanel() {
-    setShowBaristaPanel(false);
+    baristaPanel.open();
   }
 
   function openProfile() {
-    setShowProfile(true);
-  }
-
-  function closeProfile() {
-    setShowProfile(false);
+    closeDrawer();
+    profilePanel.open();
   }
 
   return (
@@ -230,71 +209,49 @@ export default function Drawer({ onSignUp, onSignIn }: DrawerProps) {
         </div>
       </aside>
 
-      {showSignUp && (
-        <div className="card-overlay" onClick={closeSignUp}>
-          <div
-            className="card-modal open"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <SignUp onSignUp={handleSignUp} closeSignUp={closeSignUp} />
-          </div>
-        </div>
-      )}
+      <Modal isOpen={signUp.isOpen} onClose={signUp.close}>
+        <SignUp onSignUp={handleSignUp} closeSignUp={signUp.close} />
+      </Modal>
 
-      {showSignIn && (
-        <div className="card-overlay" onClick={closeSignIn}>
-          <div
-            className="card-modal open"
-            onClick={(event) => event.stopPropagation()}
-          >
-            <SignIn onSignIn={handleSignIn} closeSignIn={closeSignIn} />
-          </div>
-        </div>
-      )}
+      <Modal isOpen={signIn.isOpen} onClose={signIn.close}>
+        <SignIn onSignIn={handleSignIn} closeSignIn={signIn.close} />
+      </Modal>
 
-      {showInfo && (
-        <div className="store-info-overlay" onClick={closeStoreInfo}>
-          <div
-            className={`store-info-modal ${showInfo ? "open" : ""}`}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <StoreInfo closeInfo={closeStoreInfo} />
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={storeInfo.isOpen}
+        onClose={storeInfo.close}
+        overlayClassName="store-info-overlay"
+        modalClassName="store-info-modal"
+      >
+        <StoreInfo closeInfo={storeInfo.close} />
+      </Modal>
 
-      {showAdminPanel && (
-        <div className="admin-overlay" onClick={closeAdminPanel}>
-          <div
-            className={`admin-modal ${showAdminPanel ? "open" : ""}`}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <AdminPanel closeAdminPanel={closeAdminPanel} />
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={adminPanel.isOpen}
+        onClose={adminPanel.close}
+        overlayClassName="admin-overlay"
+        modalClassName="admin-modal"
+      >
+        <AdminPanel closeAdminPanel={adminPanel.close} />
+      </Modal>
 
-      {showBaristaPanel && (
-        <div className="barista-overlay" onClick={closeBaristaPanel}>
-          <div
-            className={`barista-modal ${showBaristaPanel ? "open" : ""}`}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <Barista closeBaristaPanel={closeBaristaPanel} />
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={baristaPanel.isOpen}
+        onClose={baristaPanel.close}
+        overlayClassName="barista-overlay"
+        modalClassName="barista-modal"
+      >
+        <Barista closeBaristaPanel={baristaPanel.close} />
+      </Modal>
 
-      {showProfile && (
-        <div className="card-overlay" onClick={closeProfile}>
-          <div
-            className={`card-modal ${showProfile ? "open" : ""}`}
-            onClick={(event) => event.stopPropagation()}
-          >
-            <Profile onCloseButton={closeProfile} />
-          </div>
-        </div>
-      )}
+      <Modal
+        isOpen={profilePanel.isOpen}
+        onClose={profilePanel.close}
+        overlayClassName="profile-overlay"
+        modalClassName="profile-modal"
+      >
+        <Profile onCloseButton={profilePanel.close} />
+      </Modal>
     </>
   );
 }

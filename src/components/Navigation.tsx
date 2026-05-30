@@ -1,4 +1,4 @@
-import Home from "./Home";
+import Home from "../features/Home/Home";
 import Checkout from "../features/checkout/components/Checkout";
 import { useState } from "react";
 import { useLocalStorage } from "../hooks/useLocalStorage";

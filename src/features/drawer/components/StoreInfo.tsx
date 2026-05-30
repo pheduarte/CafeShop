@@ -1,4 +1,5 @@
 import { CloseButton } from "../../../global/ui/closeButton";
+import "./StoreInfo.scss";
 
 type StoreInfoProps = {
   closeInfo: () => void;
